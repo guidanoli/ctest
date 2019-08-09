@@ -6,7 +6,7 @@
   #include <string.h>
   #include <assert.h>
   #include <stdarg.h>
-  #include "test.h"
+  #include "ctest.h"
 
   /********************/
   /* Global variables */

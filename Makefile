@@ -7,7 +7,7 @@ LDFLAGS = -shared  # linking flags
 RM = rm -f  # rm command
 TARGET_LIB = ctest.so # target lib
 
-SRCS = test.c # source files
+SRCS = ctest.c # source files
 OBJS = $(SRCS:.c=.o)
 
 .PHONY: all
