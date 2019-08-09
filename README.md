@@ -17,6 +17,16 @@ Simply run the following command on your terminal on the project root folder:
 $ make
 ```
 
-## Binding
+## Linking and compiling
 
+On your source file, simply include the CTest header file, eg:
 
+``` c
+#include "../lib/ctest/ctest.h"
+```
+
+And for compiling, simply add the library as so:
+
+``` bash
+$ gcc -o prog prog.o -L/../lib/ctest -ldllctest
+```
