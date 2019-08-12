@@ -1,32 +1,23 @@
 # CTest - unit test library
 
-A lightweight unit test library that operates only with:
+A lightweight testing library that operates only with:
 * `assert` - checks whether the parameter is true
 * `fatal_assert` - if the parameter is false, halts
 * `show_log` - prints to screen if there was any false asserts
 
-You can either bind the library or compile the source code all toghether.
-It really depends whether you intend to test multiple modules or just one and
-you really don't want to bother with dynamic binding.
-
-## Shared Object (.so)
-
-Simply run the following command on your terminal on the project root folder:
-
-``` bash
-$ make
-```
+Currently, you must compile the source code by your own since dynamic libraries are just too complicated to be in a pretty straightforward to use library. On the other hand, if you do know how to write a good Makefile to compile the code in `.so` or `.dll`, please fork this repository.
 
 ## Linking and compiling
 
-On your source file, simply include the CTest header file, eg:
+On your source file, simply include the CTest header file:
 
 ``` c
-#include "../lib/ctest/ctest.h"
+#include "../path/to/ctest.h"
 ```
 
-And for compiling, simply add the library as so:
+And for compiling, simply compile with the object file:
 
 ``` bash
-$ gcc -o prog prog.o -L/../lib/ctest -ldllctest
+$ gcc -o ctest.o ctest.c -c
+$ gcc -o myprog myprog.o ctest.o
 ```
