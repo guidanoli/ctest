@@ -19,16 +19,29 @@ This will generate the`liblwctest.so` dynamic library file. This may sit on your
 
 ## Linking and compiling
 
+Assuming that your projects' folder hierarchy looks something like this:
+
+```
+- src
+	- foo.c
+- lib
+	- lwct.h
+	- liblwct.so
+```
+
 On your source file, simply include the LWCT header file:
 
 ``` c
-#include "../path/to/lib/lwct.h"
+foo.c
+
+#include "../lib/lwct.h"
+...
 ```
 
 And for compiling, simply compile with the dynamic library file, specifying the folder it's located at:
 
 ``` bash
-$ gcc -o foo foo.o -L/path/to/lib -llwctl
+$ gcc -o foo foo.c -L../lib -llwctl -Wl,-R../lib
 ```
 
-Make sure to place the last two arguments at the end since, according to the [gcc documentation](https://linux.die.net/man/1/gcc), files after those flags will be linked to these libraries.
+Make sure to place these last arguments at the end, since, according to the [gcc documentation](https://linux.die.net/man/1/gcc), files after those flags will not be linked to these libraries.

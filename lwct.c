@@ -14,8 +14,8 @@
   /* Global variables */
   /********************/
 
-  int n_tests = 0;   // Number of asserts
-  int n_failed = 0;  // Number of failed asserts
+  static int n_tests = 0;   // Number of asserts
+  static int n_failed = 0;  // Number of failed asserts
 
   /*********************/
   /* Private functions */
