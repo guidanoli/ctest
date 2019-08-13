@@ -1,9 +1,11 @@
 CC = gcc
 CFLAGS = -w
+LIBNAME = lwctest
 FILES = $(wildcard *.c)
 OBJS = $(subst .c,.o,$(FILES))
+LIBFILE = $(addsuffix .so, $(addprefix lib, $(LIBNAME)))
 
-libctest.so: $(OBJS)
+$(LIBFILE): $(OBJS)
 	$(CC) -shared -o $@ $^ $(CFLAGS)
 
 %.o: %.c
