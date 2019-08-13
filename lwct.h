@@ -1,11 +1,13 @@
 
-  // Test module interface
+  // Lightweight C test module interface
+  // This file is under the GPL-3.0 licence
+  // Read the LICENSE file for the full text
   // Guilherme Dantas
 
-  #ifndef TEST_H
-  #define TEST_H
+  #ifndef LWCT_H
+  #define LWCT_H
 
-  #include "colours.h"
+  #include "lwct_colours.h"
 
   // Aborts test, displaying the statement that caused it and line,
   // and, additionally, shows log.

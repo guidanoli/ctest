@@ -1,4 +1,4 @@
-# LWCTest - lightweight C test library
+# LWCTL - lightweight C test library
 
 A lightweight testing library that operates only with:
 * `assert` - checks whether the parameter is true
@@ -19,16 +19,16 @@ This will generate the`liblwctest.so` dynamic library file. This may sit on your
 
 ## Linking and compiling
 
-On your source file, simply include the LWCTest header file:
+On your source file, simply include the LWCT header file:
 
 ``` c
-#include "../path/to/lib/lwctest.h"
+#include "../path/to/lib/lwct.h"
 ```
 
 And for compiling, simply compile with the dynamic library file, specifying the folder it's located at:
 
 ``` bash
-$ gcc -o foo foo.o -L/path/to/lib -llwctest
+$ gcc -o foo foo.o -L/path/to/lib -llwctl
 ```
 
 Make sure to place the last two arguments at the end since, according to the [gcc documentation](https://linux.die.net/man/1/gcc), files after those flags will be linked to these libraries.

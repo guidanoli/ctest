@@ -1,9 +1,11 @@
 
   // Colours for colourful printfs 8-)
+  // This library is under the GPL-3.0 licence
+  // Read the LICENSE file for the full text
   // Guilherme Dantas
 
-  #ifndef COLOUR_CODES
-  #define COLOUR_CODES
+  #ifndef LWCT_COLORS_H
+  #define LWCT_COLORS_H
 
     #define DEFAULT_COLOUR "\033[0m"
     #define RED "\033[0;31m"

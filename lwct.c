@@ -1,12 +1,14 @@
 
-  // Test module implementation
+  // Lightweight C test module implementation
+  // This file is under the GPL-3.0 licence
+  // Read the LICENSE file for the full text
   // Guilherme Dantas
 
   #include <stdio.h>
   #include <string.h>
   #include <assert.h>
   #include <stdarg.h>
-  #include "ctest.h"
+  #include "lwct.h"
 
   /********************/
   /* Global variables */
@@ -29,8 +31,8 @@
 
   void abort_test(int boolean, const char * label, const line)
   {
-    if (boolean) return;
     assertcolor(boolean,label,line);
+    if (boolean) return;
     printerror("The program will be aborted due to a fatal error.");
     show_log();
     exit(1);
