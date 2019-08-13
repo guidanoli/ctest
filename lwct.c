@@ -6,85 +6,72 @@
 
   #include <stdio.h>
   #include <string.h>
-  #include <assert.h>
-  #include <stdarg.h>
   #include "lwct.h"
+
+  #define ERROR_TAG "ERROR",RED
+  #define LOG_TAG "LOG",YELLOW
+  #define SUCCESS_TAG "SUCCESS",GREEN
 
   /********************/
   /* Global variables */
   /********************/
 
-  static int n_tests = 0;   // Number of asserts
-  static int n_failed = 0;  // Number of failed asserts
+  static unsigned long n_tests = 0;   // Number of asserts
+  static unsigned long n_failed = 0;  // Number of failed asserts
 
   /*********************/
   /* Private functions */
   /*********************/
 
-  static void printcolor(const char * tag, const char * color, const char * msg);
-  static void printerror(const char * msg);
-  static void printsuccess(const char * msg);
+  static inline void print_tag (const char * tag, const char * color);
 
   /**********************/
   /* Exported functions */
   /**********************/
 
-  void abort_test(int boolean, const char * label, const line)
+  void abort_test (const char boolean, const char * label, const line)
   {
-    assertcolor(boolean,label,line);
+    assertcolor(boolean, label, line);
     if (boolean) return;
-    printerror("The program will be aborted due to a fatal error.");
+    print_tag(ERROR_TAG);
+    printf("The program will be aborted due to a fatal error.\n");
     show_log();
     exit(1);
   }
 
-  void show_log()
+  void show_log ()
   {
-    char msg[256];
-    sprintf(msg,"%d asserts",n_tests);
-    printcolor("LOG",YELLOW,msg);
-    if( n_failed == 0 ) sprintf(msg,"No errors found");
-    else sprintf(msg,"%d error%s found",n_failed,n_failed==1?"":"s");
-    printcolor("LOG",YELLOW,msg);
+    print_tag(LOG_TAG);
+    printf("%lu asserts.\n", n_tests);
+    print_tag(LOG_TAG);
+    if ( n_failed == 0 ) printf("No errors found.\n");
+    else printf("%lu error%s found.\n", n_failed, n_failed==1 ? "" : "s");
   }
 
-  void assertcolor(int boolean, const char * label, const line)
+  void assertcolor (const char boolean, const char * label, const line)
   {
-    if(boolean)
+    if (boolean)
     {
-      printsuccess(label);
+      print_tag(SUCCESS_TAG);
+      printf("%s\n", label);
     }
     else
     {
-      char msg[256] = "";
-      char line_s[8] = "";
-      strcpy(msg,label);
-      strcat(msg," failed at line ");
-      sprintf(line_s,"%d.",line);
-      strcat(msg,line_s);
-      printerror(msg);
+      print_tag(ERROR_TAG);
+      printf("%s failed at line %d.\n", label, line);
+      ++n_failed;
     }
-    n_tests++;
+    ++n_tests;
   }
 
   /************************************/
   /* Private functions implementation */
   /************************************/
 
-  static void printcolor(const char * tag, const char * color, const char * msg)
+  static inline void print_tag (const char * tag, const char * color)
   {
-    printf(DEFAULT_COLOUR);  printf("[");
-    printf(color);          printf(tag);
-    printf(DEFAULT_COLOUR);  printf("] %s\n",msg);
-  }
-
-  static void printerror(const char * msg)
-  {
-    printcolor("ERROR",RED,msg);
-    n_failed++;
-  }
-
-  static void printsuccess(const char * msg)
-  {
-    printcolor("SUCCESS",GREEN,msg);
+    printf("%s[%s%s%s] ", DEFAULT_COLOUR, \
+                          color, \
+                          tag, \
+                          DEFAULT_COLOUR);
   }
