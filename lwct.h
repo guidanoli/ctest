@@ -9,11 +9,14 @@
 
   // Fatal assert macro
   // statement - boolean value to be evaluated
-  #define fatal_assert(statement) abort_test(statement,#statement,__LINE__)
+  #define fatal_assert(statement) LWCTL_FatalAssert(statement,#statement,__LINE__)
 
   // Assert macro
   // statement - boolean value to be evaluated
-  #define assert(statement) assertcolor(statement,#statement,__LINE__)
+  #define assert(statement) LWCTL_Assert(statement,#statement,__LINE__)
+
+  // Show log macro
+  #define show_log() LWCTL_ShowLog()
 
   // Aborts test, displaying the statement that caused it and line,
   // and, additionally, shows log.
@@ -22,17 +25,17 @@
   // line - statement line in code
   // > (to stderr) error message + test log, nothing
   // [!] if boolean is false, the program is exited.
-  void abort_test (const char boolean, const char * label, const line);
+  void LWCTL_FatalAssert (const char boolean, const char * label, const line);
 
   // Asserts statement, displaying it and the line it's at if false
   // boolean - if false, error is thrown
   // label - statement string
   // line - statement line in code
   // > (to stderr) error message, nothing
-  void assertcolor (const char boolean, const char * label, const line);
+  void LWCTL_Assert (const char boolean, const char * label, const line);
 
   // Ouputs information stored in counters at a given time
   // > (to stdout) test log
-  void show_log ();
+  void LWCTL_ShowLog ();
 
   #endif

@@ -30,17 +30,17 @@
   /* Exported functions */
   /**********************/
 
-  void abort_test (const char boolean, const char * label, const line)
+  void LWCTL_FatalAssert (const char boolean, const char * label, const line)
   {
-    assertcolor(boolean, label, line);
+    LWCTL_Assert(boolean, label, line);
     if (boolean) return;
     print_tag(ERROR_TAG);
     printf("The program will be aborted due to a fatal error.\n");
-    show_log();
+    LWCTL_ShowLog();
     exit(1);
   }
 
-  void show_log ()
+  void LWCTL_ShowLog ()
   {
     print_tag(LOG_TAG);
     printf("%lu asserts.\n", n_tests);
@@ -49,17 +49,17 @@
     else printf("%lu error%s found.\n", n_failed, n_failed==1 ? "" : "s");
   }
 
-  void assertcolor (const char boolean, const char * label, const line)
+  void LWCTL_Assert (const char boolean, const char * label, const line)
   {
     if (boolean)
     {
       print_tag(SUCCESS_TAG);
-      printf("%s\n", label);
+      printf("\"%s\"\n", label);
     }
     else
     {
       print_tag(ERROR_TAG);
-      printf("%s failed at line %d.\n", label, line);
+      printf("\"%s\" failed at line %d.\n", label, line);
       ++n_failed;
     }
     ++n_tests;
