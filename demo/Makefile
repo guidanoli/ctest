@@ -1,5 +1,6 @@
 CC = gcc
-CFLAGS = -w -L.. -llwctl -Wl,-R..
+LIBS = lwctl
+CFLAGS = -w -L.. $(addprefix -l, $(LIBS)) -Wl,-R..
 SRC = $(wildcard *.c)
 OUT = $(patsubst %.c, %.out, $(SRC))
 

@@ -7,6 +7,7 @@
   #include <stdio.h>
   #include <string.h>
   #include "lwct.h"
+  #include "lwct_colours.h"
 
   #define ERROR_TAG "ERROR",RED
   #define LOG_TAG "LOG",YELLOW

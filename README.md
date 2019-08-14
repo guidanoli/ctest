@@ -22,11 +22,12 @@ This will generate the`liblwctest.so` dynamic library file. This may sit on your
 Assuming that your projects' folder hierarchy looks something like this:
 
 ```
+- include
+	- lwct.h
+- lib
+	- liblwctl.so
 - src
 	- foo.c
-- lib
-	- lwct.h
-	- liblwct.so
 ```
 
 On your source file, simply include the LWCT header file:
@@ -34,7 +35,7 @@ On your source file, simply include the LWCT header file:
 ``` c
 foo.c
 
-#include "../lib/lwct.h"
+#include "../include/lwct.h"
 ...
 ```
 
