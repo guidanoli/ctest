@@ -14,17 +14,33 @@
   /**
   * Fatal assert - similar to assert but halts if statement is false
   *   statement - boolean value to be asserted
-  * > (to stderr) error message + test log, nothing
+  * > (to stdout) error message + test log, nothing
   * [!] if statement is false, the program is terminated.
   */
-  #define fatal_assert(statement) LWCTL_FatalAssert(statement,#statement,__func__,__LINE__)
+  #define fatal_assert(statement) \
+                                  \
+          LWCTL_FatalAssert(      \
+            statement,            \
+            #statement,           \
+            __FILE__,             \
+            __func__,             \
+            __LINE__              \
+          )                       \
 
   /**
   * Assert - logs to screen whether statement is true of false
   *   statement - boolean value to be asserted
-  * > (to stderr) error message, nothing
+  * > (to stdout) error message, nothing
   */
-  #define assert(statement) LWCTL_Assert(statement,#statement,__func__,__LINE__)
+  #define assert(statement)       \
+                                  \
+          LWCTL_Assert(           \
+            statement,            \
+            #statement,           \
+            __FILE__,             \
+            __func__,             \
+            __LINE__              \
+          )                       \
 
   /**
   * Show Log - prints to screen all tests run (total/errors)
@@ -44,14 +60,17 @@
   *   label - statement string
   *   func - calling function name
   *   line - statement line in code
-  * > (to stderr) error message + test log, nothing
+  * > (to stdout) error message + test log, nothing
   * [!] if boolean is false, the program is terminated.
   */
   void LWCTL_FatalAssert (
+                        \
     const char boolean, \
     const char * label, \
+    const char * file,  \
     const char * func,  \
     const line          \
+                        \
   );
 
   /**
@@ -60,13 +79,16 @@
   *   label - statement string
   *   func - calling function name
   *   line - statement line in code
-  * > (to stderr) error message, nothing
+  * > (to stdout) error message, nothing
   */
   void LWCTL_Assert (
+                        \
     const char boolean, \
     const char * label, \
+    const char * file,  \
     const char * func,  \
     const line          \
+                        \
   );
 
   /**
