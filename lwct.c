@@ -13,26 +13,31 @@
   #define LOG_TAG "LOG",YELLOW
   #define SUCCESS_TAG "SUCCESS",GREEN
 
-  /********************/
-  /* Global variables */
-  /********************/
+  //////////////////////
+  // GLOBAL VARIABLES //
+  //////////////////////
 
   static unsigned long n_tests = 0;   // Number of asserts
   static unsigned long n_failed = 0;  // Number of failed asserts
 
-  /*********************/
-  /* Private functions */
-  /*********************/
+  ///////////////////////
+  // PRIVATE FUNCTIONS //
+  ///////////////////////
 
   static inline void print_tag (const char * tag, const char * color);
 
-  /**********************/
-  /* Exported functions */
-  /**********************/
+  ////////////////////////
+  // EXPORTED FUNCTIONS //
+  ////////////////////////
 
-  void LWCTL_FatalAssert (const char boolean, const char * label, const line)
+  void LWCTL_FatalAssert (
+    const char boolean, \
+    const char * label, \
+    const char * func,  \
+    const line          \
+  )
   {
-    LWCTL_Assert(boolean, label, line);
+    LWCTL_Assert(boolean, label, func, line);
     if (boolean) return;
     print_tag(ERROR_TAG);
     printf("The program will be aborted due to a fatal error.\n");
@@ -49,7 +54,12 @@
     else printf("%lu error%s found.\n", n_failed, n_failed==1 ? "" : "s");
   }
 
-  void LWCTL_Assert (const char boolean, const char * label, const line)
+  void LWCTL_Assert (
+    const char boolean, \
+    const char * label, \
+    const char * func,  \
+    const line          \
+  )
   {
     if (boolean)
     {
@@ -59,15 +69,16 @@
     else
     {
       print_tag(ERROR_TAG);
-      printf("\"%s\" failed at line %d.\n", label, line);
+      printf("\"%s\" failed in %s:%d\n", label, func, line);
       ++n_failed;
     }
     ++n_tests;
   }
 
-  /************************************/
-  /* Private functions implementation */
-  /************************************/
+  //////////////////////////////////////
+  // PRIVATE FUNCTIONS IMPLEMENTATION //
+  //////////////////////////////////////
+
 
   static inline void print_tag (const char * tag, const char * color)
   {

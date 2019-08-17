@@ -7,35 +7,72 @@
   #ifndef LWCT_H
   #define LWCT_H
 
-  // Fatal assert macro
-  // statement - boolean value to be evaluated
-  #define fatal_assert(statement) LWCTL_FatalAssert(statement,#statement,__LINE__)
+  ///////////////////////
+  // MACRO DEFINITIONS //
+  ///////////////////////
 
-  // Assert macro
-  // statement - boolean value to be evaluated
-  #define assert(statement) LWCTL_Assert(statement,#statement,__LINE__)
+  /**
+  * Fatal assert - similar to assert but halts if statement is false
+  *   statement - boolean value to be asserted
+  * > (to stderr) error message + test log, nothing
+  * [!] if statement is false, the program is terminated.
+  */
+  #define fatal_assert(statement) LWCTL_FatalAssert(statement,#statement,__func__,__LINE__)
 
-  // Show log macro
+  /**
+  * Assert - logs to screen whether statement is true of false
+  *   statement - boolean value to be asserted
+  * > (to stderr) error message, nothing
+  */
+  #define assert(statement) LWCTL_Assert(statement,#statement,__func__,__LINE__)
+
+  /**
+  * Show Log - prints to screen all tests run (total/errors)
+  * > (to stdout) test log
+  */
   #define show_log() LWCTL_ShowLog()
 
-  // Aborts test, displaying the statement that caused it and line,
-  // and, additionally, shows log.
-  // boolean - if false, error is thrown
-  // label - statement string
-  // line - statement line in code
-  // > (to stderr) error message + test log, nothing
-  // [!] if boolean is false, the program is exited.
-  void LWCTL_FatalAssert (const char boolean, const char * label, const line);
+  /////////////////////////
+  // FUNCTION SIGNATURES //
+  /////////////////////////
 
-  // Asserts statement, displaying it and the line it's at if false
-  // boolean - if false, error is thrown
-  // label - statement string
-  // line - statement line in code
-  // > (to stderr) error message, nothing
-  void LWCTL_Assert (const char boolean, const char * label, const line);
+  /**
+  * Asserts if a given boolean value is false and if
+  * so, terminates the program. Useful when an unexpected
+  * error occurrs (e.g. error in dynamic memory allocation)
+  *   boolean - if false, error is thrown
+  *   label - statement string
+  *   func - calling function name
+  *   line - statement line in code
+  * > (to stderr) error message + test log, nothing
+  * [!] if boolean is false, the program is terminated.
+  */
+  void LWCTL_FatalAssert (
+    const char boolean, \
+    const char * label, \
+    const char * func,  \
+    const line          \
+  );
 
-  // Ouputs information stored in counters at a given time
-  // > (to stdout) test log
+  /**
+  * Asserts statement, displaying it and the line it's at if false
+  *   boolean - if false, error is thrown
+  *   label - statement string
+  *   func - calling function name
+  *   line - statement line in code
+  * > (to stderr) error message, nothing
+  */
+  void LWCTL_Assert (
+    const char boolean, \
+    const char * label, \
+    const char * func,  \
+    const line          \
+  );
+
+  /**
+  * Ouputs information stored in counters at a given time
+  * > (to stdout) test log
+  */
   void LWCTL_ShowLog ();
 
   #endif
