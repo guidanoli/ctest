@@ -6,7 +6,6 @@
   ** Guilherme Dantas
   */
 
-  #include <stdio.h>
   #include "../lwct_colours.h"
 
   /*
@@ -19,14 +18,14 @@
   #define CKDEF__(item) "" #item
 
   #define CKDEF_(sx, x, color)        \
-    puts(CYAN sx ": " color x WHITE)  \
+  puts(MAGENTA sx ": " color x DEFCOLOR) \
 
   #define CKDEF(x)                    \
   do {                                \
     if(strcmp("" #x, CKDEF__(x)))     \
       CKDEF_(#x, DEFSTR, GREEN);      \
     else                              \
-      CKDEF_(#x, UNDEFSTR, BOLD_RED); \
+      CKDEF_(#x, UNDEFSTR, RED);      \
   } while(0)                          \
 
   int main (void) {

@@ -54,7 +54,7 @@
     LWCT_Assert(boolean, label, file, func, line);
     if ( boolean ) return;
     print_tag(ERROR_TAG);
-    printf("The program will be aborted due to a fatal error.\n");
+    puts("The program will be aborted due to a fatal error.");
     LWCT_ShowLog();
     exit(1);
   }
@@ -74,10 +74,10 @@
       current_file = file;
       printf(
         "%sOn file %s%s%s\n",   \
-        WHITE,                  \
-        ULINED_WHITE,           \
+        DEFCOLOR,               \
+        ULINED_DEFCOLOR,        \
         file,                   \
-        WHITE                   \
+        DEFCOLOR                \
       );
     }
     if ( boolean )
@@ -99,7 +99,7 @@
     print_tag(LOG_TAG);
     printf("%lu asserts.\n", n_tests);
     print_tag(LOG_TAG);
-    if ( n_failed == 0 ) printf("No errors found.\n");
+    if ( n_failed == 0 ) puts("No errors found.");
     else printf("%lu error%s found.\n", n_failed, PLURAL(n_failed));
   }
 
@@ -115,10 +115,11 @@
   )
   {
     printf(
-      "%s[%s%s%s] ",  \
-      WHITE,          \
-      color,          \
-      tag,            \
-      WHITE           \
+      "%s[%s%s%s]%s ",  \
+      WHITE,            \
+      color,            \
+      tag,              \
+      WHITE,            \
+      DEFCOLOR          \
     );
   }
