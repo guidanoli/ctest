@@ -1,8 +1,10 @@
 
-  // Lightweight C test module implementation
-  // This file is under the GPL-3.0 licence
-  // Read the LICENSE file for the full text
-  // Guilherme Dantas
+  /*
+  ** Lightweight C test module implementation
+  ** This file is under the GPL-3.0 licence
+  ** Read the LICENSE file for the full text
+  ** Guilherme Dantas
+  */
 
   #include <stdio.h>
   #include <string.h>

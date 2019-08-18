@@ -1,8 +1,10 @@
 
-  // Lightweight C test module interface
-  // This file is under the GPL-3.0 licence
-  // Read the LICENSE file for the full text
-  // Guilherme Dantas
+  /*
+  ** Lightweight C test module interface
+  ** This file is under the GPL-3.0 licence
+  ** Read the LICENSE file for the full text
+  ** Guilherme Dantas
+  */
 
   #ifndef LWCT_H
   #define LWCT_H
@@ -11,40 +13,40 @@
   // MACRO DEFINITIONS //
   ///////////////////////
 
-  /**
-  * Fatal assert - similar to assert but halts if statement is false
-  *   statement - boolean value to be asserted
-  * > (to stdout) error message + test log, nothing
-  * [!] if statement is false, the program is terminated.
+  /*
+  ** Fatal assert - similar to assert but halts if statement is false
+  **   statement - boolean value to be asserted
+  ** > (to stdout) error message + test log, nothing
+  ** [!] if statement is false, the program is terminated.
   */
-  #define fatal_assert(statement) \
-                                  \
-          LWCT_FatalAssert(      \
-            statement,            \
-            #statement,           \
-            __FILE__,             \
-            __func__,             \
-            __LINE__              \
-          )                       \
+  #define fatal_assert(statement)               \
+                                                \
+          LWCT_FatalAssert(                     \
+            statement,                          \
+            #statement,                         \
+            __FILE__,                           \
+            __func__,                           \
+            __LINE__                            \
+          )                                     \
 
-  /**
-  * Assert - logs to screen whether statement is true of false
-  *   statement - boolean value to be asserted
-  * > (to stdout) error message, nothing
+  /*
+  ** Assert - logs to screen whether statement is true of false
+  **   statement - boolean value to be asserted
+  ** > (to stdout) error message, nothing
   */
-  #define assert(statement)       \
-                                  \
-          LWCT_Assert(           \
-            statement,            \
-            #statement,           \
-            __FILE__,             \
-            __func__,             \
-            __LINE__              \
-          )                       \
+  #define assert(statement)                     \
+                                                \
+          LWCT_Assert(                          \
+            statement,                          \
+            #statement,                         \
+            __FILE__,                           \
+            __func__,                           \
+            __LINE__                            \
+          )                                     \
 
-  /**
-  * Show Log - prints to screen all tests run (total/errors)
-  * > (to stdout) test log
+  /*
+  ** Show Log - prints to screen all tests run (total/errors)
+  ** > (to stdout) test log
   */
   #define show_log() LWCT_ShowLog()
 
@@ -52,16 +54,16 @@
   // FUNCTION SIGNATURES //
   /////////////////////////
 
-  /**
-  * Asserts if a given boolean value is false and if
-  * so, terminates the program. Useful when an unexpected
-  * error occurrs (e.g. error in dynamic memory allocation)
-  *   boolean - if false, error is thrown
-  *   label - statement string
-  *   func - calling function name
-  *   line - statement line in code
-  * > (to stdout) error message + test log, nothing
-  * [!] if boolean is false, the program is terminated.
+  /*
+  ** Asserts if a given boolean value is false and if
+  ** so, terminates the program. Useful when an unexpected
+  ** error occurrs (e.g. error in dynamic memory allocation)
+  **   boolean - if false, error is thrown
+  **   label - statement string
+  **   func - calling function name
+  **   line - statement line in code
+  ** > (to stdout) error message + test log, nothing
+  ** [!] if boolean is false, the program is terminated.
   */
   void LWCT_FatalAssert (
                         \
@@ -73,13 +75,13 @@
                         \
   );
 
-  /**
-  * Asserts statement, displaying it and the line it's at if false
-  *   boolean - if false, error is thrown
-  *   label - statement string
-  *   func - calling function name
-  *   line - statement line in code
-  * > (to stdout) error message, nothing
+  /*
+  ** Asserts statement, displaying it and the line it's at if false
+  **   boolean - if false, error is thrown
+  **   label - statement string
+  **   func - calling function name
+  **   line - statement line in code
+  ** > (to stdout) error message, nothing
   */
   void LWCT_Assert (
                         \
@@ -91,9 +93,9 @@
                         \
   );
 
-  /**
-  * Ouputs information stored in counters at a given time
-  * > (to stdout) test log
+  /*
+  ** Ouputs information stored in counters at a given time
+  ** > (to stdout) test log
   */
   void LWCT_ShowLog ();
 

@@ -1,8 +1,10 @@
 
-  // Colours for colourful printfs 8-)
-  // This library is under the GPL-3.0 licence
-  // Read the LICENSE file for the full text
-  // Guilherme Dantas
+  /*
+  ** Colours for colourful printfs 8-)
+  ** This library is under the GPL-3.0 licence
+  ** Read the LICENSE file for the full text
+  ** Guilherme Dantas
+  */
 
   #ifndef LWCT_COLORS_H
   #define LWCT_COLORS_H
