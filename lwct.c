@@ -39,7 +39,7 @@
   // EXPORTED FUNCTIONS //
   ////////////////////////
 
-  void LWCTL_FatalAssert (
+  void LWCT_FatalAssert (
                         \
     const char boolean, \
     const char * label, \
@@ -49,15 +49,15 @@
                         \
   )
   {
-    LWCTL_Assert(boolean, label, file, func, line);
+    LWCT_Assert(boolean, label, file, func, line);
     if ( boolean ) return;
     print_tag(ERROR_TAG);
     printf("The program will be aborted due to a fatal error.\n");
-    LWCTL_ShowLog();
+    LWCT_ShowLog();
     exit(1);
   }
 
-  void LWCTL_Assert (
+  void LWCT_Assert (
                         \
     const char boolean, \
     const char * label, \
@@ -92,7 +92,7 @@
     ++n_tests;
   }
 
-  void LWCTL_ShowLog ()
+  void LWCT_ShowLog ()
   {
     print_tag(LOG_TAG);
     printf("%lu asserts.\n", n_tests);
@@ -104,7 +104,6 @@
   //////////////////////////////////////
   // PRIVATE FUNCTIONS IMPLEMENTATION //
   //////////////////////////////////////
-
 
   static inline void print_tag (
                         \

@@ -1,6 +1,13 @@
 CC = gcc
-LIBS = lwctl
-CFLAGS = -w -L.. $(addprefix -l, $(LIBS)) -Wl,-R..
+LIBS = lwct
+INCLUDES = lwct.h
+LIBFOLDER = ..
+INCLUDEFOLDER = ..
+CFLAGS = -w \
+					-L$(LIBFOLDER) -I$(INCLUDEFOLDER) \
+					$(addprefix -l, $(LIBS)) \
+					$(addprefix -include, $(INCLUDES)) \
+					-Wl,-R..
 SRC = $(wildcard *.c)
 OUT = $(patsubst %.c, %.out, $(SRC))
 

@@ -4,8 +4,6 @@
   // Read the LICENSE file for the full text
   // Guilherme Dantas
 
-  #include "../lwct.h"
-
   int main (void) {
     fatal_assert(1);
     show_log();

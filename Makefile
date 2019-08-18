@@ -1,6 +1,6 @@
 CC = gcc
 CFLAGS = -w
-LIBNAME = lwctl
+LIBNAME = lwct
 FILES = $(wildcard *.c)
 OBJS = $(subst .c,.o,$(FILES))
 LIBFILE = $(addsuffix .so, $(addprefix lib, $(LIBNAME)))

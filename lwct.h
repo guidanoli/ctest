@@ -19,7 +19,7 @@
   */
   #define fatal_assert(statement) \
                                   \
-          LWCTL_FatalAssert(      \
+          LWCT_FatalAssert(      \
             statement,            \
             #statement,           \
             __FILE__,             \
@@ -34,7 +34,7 @@
   */
   #define assert(statement)       \
                                   \
-          LWCTL_Assert(           \
+          LWCT_Assert(           \
             statement,            \
             #statement,           \
             __FILE__,             \
@@ -46,7 +46,7 @@
   * Show Log - prints to screen all tests run (total/errors)
   * > (to stdout) test log
   */
-  #define show_log() LWCTL_ShowLog()
+  #define show_log() LWCT_ShowLog()
 
   /////////////////////////
   // FUNCTION SIGNATURES //
@@ -63,7 +63,7 @@
   * > (to stdout) error message + test log, nothing
   * [!] if boolean is false, the program is terminated.
   */
-  void LWCTL_FatalAssert (
+  void LWCT_FatalAssert (
                         \
     const char boolean, \
     const char * label, \
@@ -81,7 +81,7 @@
   *   line - statement line in code
   * > (to stdout) error message, nothing
   */
-  void LWCTL_Assert (
+  void LWCT_Assert (
                         \
     const char boolean, \
     const char * label, \
@@ -95,6 +95,6 @@
   * Ouputs information stored in counters at a given time
   * > (to stdout) test log
   */
-  void LWCTL_ShowLog ();
+  void LWCT_ShowLog ();
 
   #endif
