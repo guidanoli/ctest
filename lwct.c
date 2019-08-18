@@ -74,10 +74,10 @@
       current_file = file;
       printf(
         "%sOn file %s%s%s\n",   \
-        DEFAULT_COLOUR,         \
-        DEFAULT_UNDERLINE,      \
+        WHITE,                  \
+        ULINED_WHITE,           \
         file,                   \
-        DEFAULT_COLOUR          \
+        WHITE                   \
       );
     }
     if ( boolean )
@@ -116,9 +116,9 @@
   {
     printf(
       "%s[%s%s%s] ",  \
-      DEFAULT_COLOUR, \
+      WHITE,          \
       color,          \
       tag,            \
-      DEFAULT_COLOUR  \
+      WHITE           \
     );
   }

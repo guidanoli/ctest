@@ -9,8 +9,8 @@
   #ifndef LWCT_COLORS_H
   #define LWCT_COLORS_H
 
-    #define DEFAULT_UNDERLINE "\033[4m"
-    #define DEFAULT_COLOUR "\033[0m"
+    #define WHITE "\033[0m"
+    #define ULINED_WHITE "\033[4m"
     #define RED "\033[0;31m"
     #define BOLD_RED "\033[1;31m"
     #define GREEN "\033[0;32m"
