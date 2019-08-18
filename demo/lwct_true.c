@@ -7,6 +7,11 @@
   */
 
   int main (void) {
-    assert(1);
-    show_log();
+    #ifdef LWCT_RENAME
+      lwct_assert(1);
+      lwct_show_log();
+    #else
+      assert(1);
+      show_log();
+    #endif
   }

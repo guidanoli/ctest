@@ -1,3 +1,4 @@
+
 # LWCTL - lightweight C test library
 
 A lightweight testing library that operates only with:
@@ -48,3 +49,16 @@ This is what each part of this command does:
 A sample Makefile can be located at the `demo` folder!
 
 Make sure to place these last arguments at the end, since, according to the [gcc documentation](https://linux.die.net/man/1/gcc), files after those flags will not be linked to these libraries.
+
+## Renaming macros
+
+By default, the macros have pretty generic names: `assert`, `show_log`... If one of those macros might conflict with your code, make sure to compile your test source code with the `LWCT_RENAME` flag. You can check out the source files and the Makefile in the `demo` folder yourself. To compile the demo tests with the macros renamed, simply run (on the `demo` folder):
+
+``` bash
+$ make rename
+```
+
+**Disclaimer:** One does not simply put `#define LWCT_RENAME` if using the `-Ipath -include header` `gcc` flags, since those will add the header text at the top of your code. Thus, either do one of the following:
+
+1. Leave it all up to the compiler.
+2. Include header files and define constants manually, before the `#include` tokens.

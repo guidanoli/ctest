@@ -13,13 +13,23 @@
   // MACRO DEFINITIONS //
   ///////////////////////
 
+  #ifdef LWCT_RENAME
+    #define lwct_fatal_assert(...) LWCT_FATAL_ASSERT_MACRO(__VA_ARGS__)
+    #define lwct_assert(...) LWCT_ASSERT_MACRO(__VA_ARGS__)
+    #define lwct_show_log(...) LWCT_SHOW_LOG_MACRO(__VA_ARGS__)
+  #else
+    #define fatal_assert(...) LWCT_FATAL_ASSERT_MACRO(__VA_ARGS__)
+    #define assert(...) LWCT_ASSERT_MACRO(__VA_ARGS__)
+    #define show_log(...) LWCT_SHOW_LOG_MACRO(__VA_ARGS__)
+  #endif
+
   /*
   ** Fatal assert - similar to assert but halts if statement is false
   **   statement - boolean value to be asserted
   ** > (to stdout) error message + test log, nothing
   ** [!] if statement is false, the program is terminated.
   */
-  #define fatal_assert(statement)               \
+  #define LWCT_FATAL_ASSERT_MACRO(statement)    \
                                                 \
           LWCT_FatalAssert(                     \
             statement,                          \
@@ -34,7 +44,7 @@
   **   statement - boolean value to be asserted
   ** > (to stdout) error message, nothing
   */
-  #define assert(statement)                     \
+  #define LWCT_ASSERT_MACRO(statement)          \
                                                 \
           LWCT_Assert(                          \
             statement,                          \
@@ -48,7 +58,7 @@
   ** Show Log - prints to screen all tests run (total/errors)
   ** > (to stdout) test log
   */
-  #define show_log() LWCT_ShowLog()
+  #define LWCT_SHOW_LOG_MACRO() LWCT_ShowLog()
 
   /////////////////////////
   // FUNCTION SIGNATURES //

@@ -7,6 +7,11 @@
   */
 
   int main (void) {
-    fatal_assert(0);
-    // show_log(); -- is not called
+    #ifdef LWCT_RENAME
+      lwct_fatal_assert(0);
+      // lwct_show_log(); -- not called
+    #else
+      fatal_assert(0);
+      // show_log(); -- not called
+    #endif
   }
