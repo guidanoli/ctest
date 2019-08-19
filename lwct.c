@@ -11,7 +11,7 @@
   #include "lwct.h"
   #include "lwct_colours.h"
 
-  //      MACRO       LABEL       COLOR
+  //      MACRO       LABEL       COLOUR
   #define ERROR_TAG   "ERROR",    RED
   #define LOG_TAG     "LOG",      YELLOW
   #define SUCCESS_TAG "SUCCESS",  GREEN
@@ -22,9 +22,9 @@
   // GLOBAL VARIABLES //
   //////////////////////
 
-  static char * current_file = __FILE__;
-  static unsigned long n_tests = 0;   // Number of asserts
-  static unsigned long n_failed = 0;  // Number of failed asserts
+  static char * current_file = __FILE__;  // Current file being tested
+  static unsigned long n_tests = 0;       // Number of asserts
+  static unsigned long n_failed = 0;      // Number of failed asserts
 
   ///////////////////////
   // PRIVATE FUNCTIONS //
@@ -33,7 +33,7 @@
   static inline void print_tag (
                         \
     const char * tag,   \
-    const char * color  \
+    const char * colour \
                         \
   );
 
@@ -52,7 +52,7 @@
   )
   {
     LWCT_Assert(boolean, label, file, func, line);
-    if ( boolean ) return;
+    if (boolean) return;
     print_tag(ERROR_TAG);
     puts("The program will be aborted due to a fatal error.");
     LWCT_ShowLog();
@@ -69,18 +69,18 @@
                         \
   )
   {
-    if ( strcmp(current_file, file) != 0 )
+    if (strcmp(current_file, file) != 0)
     {
       current_file = file;
       printf(
-        "%sOn file %s%s%s\n",   \
-        DEFCOLOR,               \
-        ULINED_DEFCOLOR,        \
-        file,                   \
-        DEFCOLOR                \
+        "%sOn file %s%s%s\n", \
+        DEFCOLOUR,            \
+        ULINED_DEFCOLOUR,     \
+        file,                 \
+        DEFCOLOUR             \
       );
     }
-    if ( boolean )
+    if (boolean)
     {
       print_tag(SUCCESS_TAG);
       printf("\"%s\"\n", label);
@@ -99,7 +99,7 @@
     print_tag(LOG_TAG);
     printf("%lu asserts.\n", n_tests);
     print_tag(LOG_TAG);
-    if ( n_failed == 0 ) puts("No errors found.");
+    if (n_failed == 0) puts("No errors found.");
     else printf("%lu error%s found.\n", n_failed, PLURAL(n_failed));
   }
 
@@ -110,16 +110,16 @@
   static inline void print_tag (
                         \
     const char * tag,   \
-    const char * color  \
+    const char * colour \
                         \
   )
   {
     printf(
       "%s[%s%s%s]%s ",  \
       WHITE,            \
-      color,            \
+      colour,           \
       tag,              \
       WHITE,            \
-      DEFCOLOR          \
+      DEFCOLOUR         \
     );
   }
