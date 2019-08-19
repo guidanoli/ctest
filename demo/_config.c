@@ -6,7 +6,7 @@
   ** Guilherme Dantas
   */
 
-  #include "../lwct_colours.h"
+  #include "lwct_colours.h"
 
   /*
   ** Macros for checking if sth is defined
