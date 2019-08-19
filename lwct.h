@@ -13,6 +13,10 @@
   // MACRO DEFINITIONS //
   ///////////////////////
 
+  /*
+  ** LWCT_RENAME - when defined, adds the 'lwct_' preffix to
+  ** all of the macros. Prefferable to avoid name conflicts.
+  */
   #ifdef LWCT_RENAME
     #define lwct_fatal_assert(...) LWCT_FATAL_ASSERT_MACRO(__VA_ARGS__)
     #define lwct_assert(...) LWCT_ASSERT_MACRO(__VA_ARGS__)

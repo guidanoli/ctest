@@ -6,11 +6,11 @@
   ** Guilherme Dantas
   */
 
-  #ifndef LWCT_COLORS_H
-  #define LWCT_COLORS_H
+  #ifndef LWCT_COLOURS_H
+  #define LWCT_COLOURS_H
 
-    #define DEFCOLOR "\033[0m"
-    #define ULINED_DEFCOLOR "\033[4m"
+    #define DEFCOLOUR "\033[0m"
+    #define ULINED_DEFCOLOUR "\033[4m"
     #define RED "\033[0;91m"
     #define BOLD_RED "\033[1;91m"
     #define GREEN "\033[0;92m"

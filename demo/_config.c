@@ -17,16 +17,16 @@
 
   #define CKDEF__(item) "" #item
 
-  #define CKDEF_(sx, x, color)        \
-  puts(MAGENTA sx ": " color x DEFCOLOR) \
+  #define CKDEF_(sx, x, colour)             \
+  puts(MAGENTA sx ": " colour x DEFCOLOUR)  \
 
-  #define CKDEF(x)                    \
-  do {                                \
-    if(strcmp("" #x, CKDEF__(x)))     \
-      CKDEF_(#x, DEFSTR, GREEN);      \
-    else                              \
-      CKDEF_(#x, UNDEFSTR, RED);      \
-  } while(0)                          \
+  #define CKDEF(x)                          \
+  do {                                      \
+    if(strcmp("" #x, CKDEF__(x)))           \
+      CKDEF_(#x, DEFSTR, GREEN);            \
+    else                                    \
+      CKDEF_(#x, UNDEFSTR, RED);            \
+  } while(0)                                \
 
   int main (void) {
     CKDEF(LWCT_RENAME);
