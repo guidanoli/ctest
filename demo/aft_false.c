@@ -1,4 +1,5 @@
 int main(void)
 {
-        lwct_fatal_assert(0);
+        struct lwct_state *ls = lwct_init();
+        lwct_fatal_assert(ls, 0);
 }
