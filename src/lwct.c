@@ -5,7 +5,7 @@
 #include <stdio.h>
 #include <string.h>
 #include "lwct.h"
-#include "lwct_colours.h"
+#include "lwct_format.h"
 #include "lwct_macros.h"
 
 /* Predefined tags */
@@ -19,7 +19,7 @@ static unsigned long n_failed = 0;
 
 static inline void print_tag(const char * tag, const char * colour)
 {
-        printf("%s[%s%s%s]%s ", WHITE, colour, tag, WHITE, DEFCOLOUR);
+        printf("%s[%s%s%s]%s ", WHITE, colour, tag, WHITE, RESET);
 }
 
 void LWCT_FatalAssert(const char boolean, const char * label,
@@ -41,7 +41,7 @@ void LWCT_Assert(const char boolean, const char * label,
         if (strcmp(current_file, file) != 0) {
                 current_file = file;
                 printf("On file %s%s%s\n",
-                       ULINED_DEFCOLOUR, file, DEFCOLOUR);
+                       UNDERLINE, file, RESET);
         }
 
         if (boolean) {
@@ -50,7 +50,7 @@ void LWCT_Assert(const char boolean, const char * label,
         } else {
                 print_tag(ERROR_TAG);
                 printf("\"%s\" failed in %s:%d\n", label, func, line);
-                
+
                 ++n_failed;
         }
         ++n_tests;
