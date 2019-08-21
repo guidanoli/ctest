@@ -37,17 +37,16 @@ void _lwct_assert(struct lwct_state *state, const char bool,
                   const char *label, const char *file,
                   const char *func, const line)
 {
-        if (strcmp(state->current_file, file) != 0) {
+        if (strcmp(state->current_file, file) != 0)
                 state->current_file = file;
-                printf("On file %s%s%s\n", UNDERLINE, file, RESET);
-        }
 
         if (bool) {
                 print_tag(SUCCESS_TAG);
                 printf("\"%s\"\n", label);
         } else {
                 print_tag(ERROR_TAG);
-                printf("\"%s\" failed in %s:%d\n", label, func, line);
+                printf("\"%s\" failed in %s:%d (%s%s%s)\n",
+                       label, func, line, UNDERLINE, file, RESET);
 
                 ++(state->n_failed);
         }
