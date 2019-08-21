@@ -15,7 +15,7 @@ $(MAKEDIRS):
 clean:
 	rm -f -r -d *.o *.so lib
 	for dir in $(ALLSUBDIRS); do \
-      $(MAKE) -C $$dir clean; \
-  done > /dev/null
+	$(MAKE) -C $$dir clean; \
+	done > /dev/null
 
 .PHONY: all $(MAKEDIRS) clean

@@ -1,17 +1,4 @@
-
-  /*
-  ** Lightweight C test Library demo
-  ** This file is under the GPL-3.0 licence
-  ** Read the LICENSE file for the full text
-  ** Guilherme Dantas
-  */
-
-  int main (void) {
-    #ifdef LWCT_RENAME
-      lwct_fatal_assert(0);
-      // lwct_show_log(); -- not called
-    #else
-      fatal_assert(0);
-      // show_log(); -- not called
-    #endif
-  }
+int main(void)
+{
+        lwct_fatal_assert(0);
+}
