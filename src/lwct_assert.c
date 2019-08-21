@@ -6,7 +6,8 @@
 #include <string.h>
 #include "lwct.h"
 #include "lwct_format.h"
-#include "lwct_macros.h"
+
+#define PLURAL(q) q==1 ? "" : "s"
 
 /* Predefined tags */
 #define ERROR_TAG   "ERROR",    RED
