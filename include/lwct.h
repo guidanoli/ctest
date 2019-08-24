@@ -1,4 +1,6 @@
 /*
+ * lwct.h
+ *
  * LWCT main header file
  */
 

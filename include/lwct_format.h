@@ -1,4 +1,6 @@
 /*
+ * lwct_format.h
+ *
  * ANSI text formatting codes
  *
  * Beware: formats do not reset on their own. Thus, be

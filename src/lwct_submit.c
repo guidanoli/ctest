@@ -1,4 +1,6 @@
 /*
+ * lwct_submit.c
+ *
  * Test submission
  */
 
