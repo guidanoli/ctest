@@ -18,7 +18,8 @@ void lwct_submit_test(void (*func)(struct lwct_state *state))
 }
 
 void lwct_submit_batch(void (*func)(struct lwct_state *state,
-                 struct lwct_submission *subinfo), unsigned long n_total)
+                        struct lwct_submission *subinfo),
+                        unsigned long n_total)
 {
         if (!func || n_total <= 0) return;
         struct lwct_state *state = lwct_init();

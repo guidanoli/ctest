@@ -48,7 +48,8 @@ struct lwct_submission {
 void lwct_submit_test(void (*func)(struct lwct_state *state));
 
 void lwct_submit_batch(void (*func)(struct lwct_state *state,
-                 struct lwct_submission *subinfo), unsigned long n_total);
+                        struct lwct_submission *subinfo),
+                        unsigned long n_total);
 
 /*
  * Functions for assertion and log display
@@ -58,8 +59,8 @@ void _lwct_fatal_assert(struct lwct_state *state, const char bool,
                         const char *func, const line);
 
 void _lwct_assert(struct lwct_state *state, const char bool,
-                  const char *label, const char *file,
-                  const char *func, const line);
+                        const char *label, const char *file,
+                        const char *func, const line);
 
 void _lwct_show_log(struct lwct_state *state);
 
