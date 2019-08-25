@@ -33,26 +33,26 @@
         printf("%s[%s%s%s]%s " message "\n", \
         WHITE, tag, WHITE, RESET, ##__VA_ARGS__)
 
-void _lwct_fatal_assert(struct lwct_state *state, const char bool,
+void _lwct_fatal_assert(struct lwct_state *S, const char bool,
                         const char *label, const char *file,
                         const char *func, const line)
 {
-        _lwct_assert(state, bool, label, file, func, line);
+        _lwct_assert(S, bool, label, file, func, line);
         if (bool) return;
 
         CTPRINT(ERROR_TAG, "The program will be aborted due to a fatal error.");
 
-        _lwct_show_log(state);
-        lwct_destroy(state);
+        _lwct_show_log(S);
+        lwct_destroy(S);
         exit(1);
 }
 
-void _lwct_assert(struct lwct_state *state, const char bool,
+void _lwct_assert(struct lwct_state *S, const char bool,
                         const char *label, const char *file,
                         const char *func, const line)
 {
-        if (strcmp(state->current_file, file) != 0)
-                state->current_file = file;
+        if (strcmp(S->current_file, file) != 0)
+                S->current_file = file;
 
         if (bool) {
                 CTPRINT(SUCCESS_TAG, "\"%s\"", label);
@@ -60,18 +60,18 @@ void _lwct_assert(struct lwct_state *state, const char bool,
                 CTPRINT(ERROR_TAG, "\"%s\" failed in %s:%d (%s%s%s)",
                         label, func, line, UNDERLINE, file, RESET);
 
-                ++(state->error_cnt);
+                ++(S->error_cnt);
         }
-        ++(state->assertion_cnt);
+        ++(S->assertion_cnt);
 }
 
-void _lwct_show_log(struct lwct_state *state)
+void _lwct_show_log(struct lwct_state *S)
 {
-        CTPRINT(LOG_TAG, "%lu asserts.", state->assertion_cnt);
+        CTPRINT(LOG_TAG, "%lu asserts.", S->assertion_cnt);
 
-        if (state->error_cnt == 0)
+        if (S->error_cnt == 0)
                 CTPRINT(LOG_TAG, "No errors found.");
         else
                 CTPRINT(LOG_TAG, "%lu error%s found.",
-                        state->error_cnt, PLURAL(state->error_cnt));
+                        S->error_cnt, PLURAL(S->error_cnt));
 }

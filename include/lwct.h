@@ -1,5 +1,5 @@
 /*
- * lwct.h, v.1.0.0
+ * lwct.h, v.2.0.0
  *
  * Lightweight C Test Library
  */
@@ -16,45 +16,45 @@
 #define lwct_assert(state, bool) \
         _lwct_assert(state, bool, #bool, __FILE__, __func__, __LINE__)
 
+/* @deprecated */
 #define lwct_show_log(state) _lwct_show_log(state)
 
+/*
+ * Testing enviroment state
+ */
 typedef struct lwct_state lwct_state;
 
 /*
-* Functions for test state lifecycle
-*/
-struct lwct_state *lwct_init();
+ * Functions for testing enviroment state life cycle
+ * @deprecated
+ */
+lwct_state *lwct_init();
 
-void lwct_destroy(struct lwct_state *state);
+void lwct_destroy(lwct_state *S);
 
 /*
- * Test submission data
+ * Functions for test submission work much like observers,
+ * and receive the following informations:
+ * @S           test enviroment state
+ * @repetition  index of repetition
  */
-struct lwct_submission {
-        unsigned long n_current;
-        unsigned long n_total;
-};
+void lwct_submit_test(void (*func)(lwct_state *S));
 
-/*
- * Functions for test submission
- */
-void lwct_submit_test(void (*func)(struct lwct_state *state));
-
-void lwct_submit_batch(void (*func)(struct lwct_state *state,
-                        struct lwct_submission *subinfo),
-                        unsigned long n_total);
+void lwct_submit_batch(void (*func)(lwct_state *S, unsigned long repetition),
+                        unsigned long repetition_cnt);
 
 /*
  * Functions for assertion and log display
  */
-void _lwct_fatal_assert(struct lwct_state *state, const char bool,
+void _lwct_fatal_assert(lwct_state *S, const char bool,
                         const char *label, const char *file,
                         const char *func, const line);
 
-void _lwct_assert(struct lwct_state *state, const char bool,
+void _lwct_assert(lwct_state *S, const char bool,
                         const char *label, const char *file,
                         const char *func, const line);
 
-void _lwct_show_log(struct lwct_state *state);
+/* @deprecated */
+void _lwct_show_log(lwct_state *S);
 
 #endif

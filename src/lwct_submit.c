@@ -1,39 +1,32 @@
 /*
- * lwct_submit.c
+ * lwct_submit.c, v.2.0.0
  *
  * Test submission
  */
 
 #include <stdlib.h>
 #include "lwct.h"
+#include "lwct_submit.h"
 #include "lwct_state.h"
 
-void lwct_submit_test(void (*func)(struct lwct_state *state))
+void lwct_submit_test(void (*func)(struct lwct_state *S))
 {
         if (!func) return;
-        struct lwct_state *state = lwct_init();
-        if (!state) return;
-        (*func)(state);
-        lwct_show_log(state);
-        lwct_destroy(state);
+        struct lwct_state *S = lwct_init();
+        if (!S) return;
+        (*func)(S);
+        lwct_show_log(S);
+        lwct_destroy(S);
 }
 
-void lwct_submit_batch(void (*func)(struct lwct_state *state,
-                        struct lwct_submission *subinfo),
-                        unsigned long n_total)
+void lwct_submit_batch(void (*func)(lwct_state *S, unsigned long rep),
+                        unsigned long repetition_cnt)
 {
-        if (!func || n_total <= 0) return;
-        struct lwct_state *state = lwct_init();
-        if (!state) return;
-        struct lwct_submission *info = malloc(sizeof(struct lwct_submission));
-        if (!info) return;
-        info->n_total = n_total;
-        info->n_current = 0;
-        for (unsigned long i = 0; i < n_total; ++i) {
-                (*func)(state, info);
-                ++(info->n_current);
-        }
-        lwct_show_log(state);
-        lwct_destroy(state);
-        free(info);
+        if (!func || repetition_cnt <= 0) return;
+        struct lwct_state *S = lwct_init();
+        if (!S) return;
+        for (unsigned long i = 0; i < repetition_cnt; ++i)
+                (*func)(S, i);
+        lwct_show_log(S);
+        lwct_destroy(S);
 }

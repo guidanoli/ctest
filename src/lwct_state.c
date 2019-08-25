@@ -1,5 +1,5 @@
 /*
- * lwct_state.c
+ * lwct_state.c, v.1.0.0
  *
  * Test state
  */
@@ -10,16 +10,16 @@
 
 struct lwct_state *lwct_init()
 {
-        struct lwct_state *state = malloc(sizeof(struct lwct_state));
-        if (!state)
+        struct lwct_state *S = malloc(sizeof(struct lwct_state));
+        if (!S)
                 return NULL;
-        state->current_file = __FILE__;
-        state->assertion_cnt = 0;
-        state->error_cnt = 0;
-        return state;
+        S->current_file = __FILE__;
+        S->assertion_cnt = 0;
+        S->error_cnt = 0;
+        return S;
 }
 
-void lwct_destroy(struct lwct_state *state)
+void lwct_destroy(struct lwct_state *S)
 {
-        free(state);
+        free(S);
 }

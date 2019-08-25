@@ -7,10 +7,9 @@ int is_prime(unsigned long p)
         return 1;
 }
 
-void tester(struct lwct_state *ls, struct lwct_submission *info)
+void tester(lwct_state *S, unsigned long n)
 {
-        unsigned long n = info->n_current + 1;
-        lwct_assert(ls, is_prime(n));
+        lwct_assert(S, is_prime(n));
 }
 
 int main(void)

@@ -2,9 +2,6 @@
  * lwct_state.h, v.1.0.0
  *
  * Test state header
- *
- * Not meant to be used outside the internal libraries files,
- * hence the hidden visibility attributes.
  */
 
 #ifndef LWCT_STATE_H
@@ -30,6 +27,6 @@ struct lwct_state {
 */
 lwct_state *lwct_init();
 
-void lwct_destroy(lwct_state *state);
+void lwct_destroy(lwct_state *S);
 
 #endif
