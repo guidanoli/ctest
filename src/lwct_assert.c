@@ -1,12 +1,12 @@
 /*
- * lwct_assert.c, v.1.0.0
+ * lwct_assert.c, v.2.0.0
  *
  * Assertion and log utilities
  */
 
 #include <stdio.h>
 #include <string.h>
-#include "lwct.h"
+#include "lwct_assert.h"
 #include "lwct_state.h"
 #include "lwct_format.h"
 
@@ -42,7 +42,7 @@ void _lwct_fatal_assert(struct lwct_state *S, const char bool,
 
         CTPRINT(ERROR_TAG, "The program will be aborted due to a fatal error.");
 
-        _lwct_show_log(S);
+        lwct_show_log(S);
         lwct_destroy(S);
         exit(1);
 }
@@ -65,7 +65,7 @@ void _lwct_assert(struct lwct_state *S, const char bool,
         ++(S->assertion_cnt);
 }
 
-void _lwct_show_log(struct lwct_state *S)
+void lwct_show_log(struct lwct_state *S)
 {
         CTPRINT(LOG_TAG, "%lu asserts.", S->assertion_cnt);
 

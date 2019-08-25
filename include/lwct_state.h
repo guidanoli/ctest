@@ -1,5 +1,5 @@
 /*
- * lwct_state.h, v.1.0.0
+ * lwct_state.h, v.1.0.1
  *
  * Test state header
  */
@@ -25,8 +25,8 @@ struct lwct_state {
 /*
 * Functions for test state lifecycle
 */
-lwct_state *lwct_init();
+LWCTL_API lwct_state *lwct_init();
 
-void lwct_destroy(lwct_state *S);
+LWCTL_API void lwct_destroy(lwct_state *S);
 
 #endif

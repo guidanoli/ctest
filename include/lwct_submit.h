@@ -1,5 +1,5 @@
 /*
- * lwct_submit.h, v.1.0.0
+ * lwct_submit.h, v.1.0.1
  *
  * Test submission
  */
@@ -12,9 +12,10 @@
 /*
  * Functions for test submission
  */
-void lwct_submit_test(void (*func)(lwct_state *S));
+LWCTL_API void lwct_submit_test(void (*func)(lwct_state *S));
 
-void lwct_submit_batch(void (*func)(lwct_state *S, unsigned long repetition),
-                        unsigned long repetition_cnt);
+LWCTL_API void lwct_submit_batch(void (*func)(lwct_state *S,
+                                unsigned long repetition),
+                                unsigned long repetition_cnt);
 
 #endif

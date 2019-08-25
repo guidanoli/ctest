@@ -6,6 +6,7 @@
 
 #include <stdlib.h>
 #include "lwct.h"
+#include "lwct_assert.h"
 #include "lwct_submit.h"
 #include "lwct_state.h"
 
