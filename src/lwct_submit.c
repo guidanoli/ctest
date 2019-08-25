@@ -6,6 +6,7 @@
 
 #include <stdlib.h>
 #include "lwct.h"
+#include "lwct_state.h"
 
 void lwct_submit_test(void (*func)(struct lwct_state *state))
 {

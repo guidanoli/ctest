@@ -1,7 +1,7 @@
 /*
- * lwct.h
+ * lwct.h, v.1.0.0
  *
- * LWCT main header file
+ * Lightweight C Test Library
  */
 
 #ifndef LWCT_H
@@ -18,14 +18,7 @@
 
 #define lwct_show_log(state) _lwct_show_log(state)
 
-/*
- * Test state data
- */
-struct lwct_state {
-        char *current_file;
-        unsigned long n_tests;
-        unsigned long n_failed;
-};
+typedef struct lwct_state lwct_state;
 
 /*
 * Functions for test state lifecycle

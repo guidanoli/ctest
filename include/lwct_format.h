@@ -1,5 +1,5 @@
 /*
- * lwct_format.h
+ * lwct_format.h, v.1.0.0
  *
  * ANSI text formatting codes
  *

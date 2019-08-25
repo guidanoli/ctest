@@ -1,5 +1,5 @@
 /*
- * lwct_assert.c
+ * lwct_assert.c, v.1.0.0
  *
  * Assertion and log utilities
  */
@@ -7,6 +7,7 @@
 #include <stdio.h>
 #include <string.h>
 #include "lwct.h"
+#include "lwct_state.h"
 #include "lwct_format.h"
 
 #define PLURAL(q) q==1 ? "" : "s"
@@ -59,18 +60,18 @@ void _lwct_assert(struct lwct_state *state, const char bool,
                 CTPRINT(ERROR_TAG, "\"%s\" failed in %s:%d (%s%s%s)",
                         label, func, line, UNDERLINE, file, RESET);
 
-                ++(state->n_failed);
+                ++(state->error_cnt);
         }
-        ++(state->n_tests);
+        ++(state->assertion_cnt);
 }
 
 void _lwct_show_log(struct lwct_state *state)
 {
-        CTPRINT(LOG_TAG, "%lu asserts.", state->n_tests);
+        CTPRINT(LOG_TAG, "%lu asserts.", state->assertion_cnt);
 
-        if (state->n_failed == 0)
+        if (state->error_cnt == 0)
                 CTPRINT(LOG_TAG, "No errors found.");
         else
                 CTPRINT(LOG_TAG, "%lu error%s found.",
-                        state->n_failed, PLURAL(state->n_failed));
+                        state->error_cnt, PLURAL(state->error_cnt));
 }
