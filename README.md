@@ -1,7 +1,9 @@
 
 # lwctl - lightweight C test library
 
-The lightweight testing library operates with test cases with boolean assertions only. That's  what makes lwctl to easy to use and portable.
+The lightweight testing library basically operates with test cases that run boolean assertions and then printing colourful logs onto screen. That's what makes lwctl so accessible, yet powerful.
+
+![LWCTL colourful assertions](https://imgur.com/aLMQK8C)
 
 ## Building the library
 
@@ -69,3 +71,27 @@ $ gcc t.foo.o foo.o -L../lib -llwct -Wl,-R../lib
 * **-Wl,-Rpath** adds the library folder to the runtime library (needed for shared objects)
 
 If you don't want to write the same long command over and over again for all your tests, there is a sample Makefile located at the `demo` folder for you!
+
+## API
+
+### Assertions
+
+The `lwct_assert(S, bool)` and `lwct_fatal_assert(S, bool)` macros take two arguments:
+* The test state (often called S)
+* The boolean sentence to be asserted
+	* FALSE (0) = error message
+	* TRUE (any other value) = success message
+
+The difference between the two macro is that when a false statement is asserted with `lwct_fatal_assert`, the program halts. This may be desirable when, for example, a data structure could not be allocated and dereferencing a `NULL` pointer would crash the program. This also allows for the log to be printed beforehand.
+
+### Tests
+
+Tests are the core of any testing facility. In the LWCT, these are simply functions implemented by the user and passed to the lwct library to create a proper testing environment. This environment keeps track of the number of assertions, errors, and current file, which is printed out at the end in a small log.
+
+#### Submitting your test
+
+The LWCTL run the tests for you! Simply implement your test case with the `void func(lwct_state *S)` signature, and then call `lwct_submit_test(func)`. It's that easy. At the end, the log is printed out.
+
+#### Submitting your batch job
+
+If you want to run tests that runs N times, we got you covered too! Simply implement your test case with the `void func(lwct_state *S, unsigned long i)` signature, and then call the `lwct_submit_test(func, N)` for N jobs. The second argument you receive is the iteration, spanning from 0 to N-1. After N repetitions, the log is printed out.
