@@ -1,3 +1,7 @@
+# Makefile
+# Compiling lwct dynamic library
+# v.1.0.0
+
 CC = gcc
 INCLUDEDIR = ../include
 LIBDIR = ../lib

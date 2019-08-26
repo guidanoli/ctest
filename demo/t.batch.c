@@ -1,3 +1,11 @@
+/*
+ * t.batch.c, v.1.0.0
+ *
+ * Batch demo
+ */
+
+#include "lwct.h"
+
 int is_prime(unsigned long p)
 {
         if (p < 2) return 0;

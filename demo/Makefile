@@ -1,17 +1,24 @@
+# Makefile
+# Compiling and linking test demos
+# v.1.1.0
+
 CC = gcc
 LIBS = lwct
 INCLUDES = lwct.h
 LIBFOLDER = ../lib
 INCLUDEFOLDER = ../include
-CFLAGS = -w -L$(LIBFOLDER) -I$(INCLUDEFOLDER) $(addprefix -l, $(LIBS)) \
-	$(addprefix -include, $(INCLUDES)) -Wl,-R$(LIBFOLDER)
+COMPILEFLAGS = -w -I$(INCLUDEFOLDER)
+LINKFLAGS = -w -L$(LIBFOLDER) $(addprefix -l, $(LIBS)) -Wl,-R$(LIBFOLDER)
 SRC = $(wildcard *.c)
 OUT = $(patsubst %.c, %.out, $(SRC))
 
 all: $(OUT)
 
-%.out: %.c
-	$(CC) -o $@ $< $(CFLAGS)
+%.o: %.c
+	$(CC) -c $< $(COMPILEFLAGS)
+
+%.out: %.o
+	$(CC) -o $@ $< $(LINKFLAGS)
 
 clean:
 	rm -f *.out

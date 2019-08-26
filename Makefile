@@ -1,3 +1,7 @@
+# Makefile
+# For building the lwctl library and demos
+# v.1.0.0
+
 CC = gcc
 CFLAGS = -w
 LIBNAME = lwct

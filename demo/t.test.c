@@ -1,10 +1,18 @@
-void err(struct lwct_state *S)
+/*
+ * t.batch.c, v.1.0.0
+ *
+ * Test demo
+ */
+
+#include "lwct.h"
+
+void err(lwct_state *S)
 {
         lwct_assert(S, 1);
         lwct_assert(S, 0);
 }
 
-void ok(struct lwct_state *S)
+void ok(lwct_state *S)
 {
         lwct_assert(S, 1);
         lwct_assert(S, 2);
