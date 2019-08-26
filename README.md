@@ -1,26 +1,26 @@
 
 # lwctl - lightweight C test library
 
-The lightweight testing library basically operates with test cases that run boolean assertions and then printing colourful logs onto screen. That's what makes lwctl so accessible, yet powerful.
+The library basically operates with test cases that run boolean assertions and then print colourful logs onto screen. That's what makes lwctl so accessible, yet powerful.
 
-![LWCTL colourful assertions](https://imgur.com/aLMQK8C)
+![LWCTL colourful assertions](https://i.imgur.com/aLMQK8C.png)
 
 ## Building the library
 
 It's just as simple as using the library itself.
 
-Just type `make` on your terminal in the same folder of the README file. This will generate the`liblwct.so` dynamic library file on the `lib` folder.
+Just run the `make` command on your terminal in the same folder of the README file. This will generate the`liblwct.so` dynamic library file on the `lib` folder.
 
 ## Building tests
 
 Assuming that your project folder hierarchy looks something like this:
 
 ```
-- include/lwct.h		# LWCT API
-- include/foo.h		# module header
-- lib/liblwct.so		# LWCT library
-- src/t.foo.c		# module test
-- src/foo.c			# module source
+- include/lwct.h # LWCT API
+- include/foo.h # module header
+- lib/liblwct.so # LWCT library
+- src/t.foo.c # module test
+- src/foo.c # module source
 ```
 
 And that your test looks something like this:
@@ -74,6 +74,8 @@ If you don't want to write the same long command over and over again for all you
 
 ## API
 
+The interface is provided by the `lwct.h` header file. This should be included in your test files. Following are the basic commands and how they work.
+
 ### Assertions
 
 The `lwct_assert(S, bool)` and `lwct_fatal_assert(S, bool)` macros take two arguments:
@@ -82,7 +84,7 @@ The `lwct_assert(S, bool)` and `lwct_fatal_assert(S, bool)` macros take two argu
 	* FALSE (0) = error message
 	* TRUE (any other value) = success message
 
-The difference between the two macro is that when a false statement is asserted with `lwct_fatal_assert`, the program halts. This may be desirable when, for example, a data structure could not be allocated and dereferencing a `NULL` pointer would crash the program. This also allows for the log to be printed beforehand.
+The difference between the two macro is that when a false statement is asserted with `lwct_fatal_assert`, the program halts. This may be desirable when, for example, a data structure could not be allocated and dereferencing a `NULL` pointer would signal `SEGSENV`, or `Segmentation fault (core dumped)`. This also ensure that log will be printed before halting.
 
 ### Tests
 
