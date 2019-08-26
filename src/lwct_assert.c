@@ -1,11 +1,10 @@
 /*
- * lwct_assert.c, v.2.0.0
+ * lwct_assert.c, v.2.0.1
  *
  * Assertion and log utilities
  */
 
 #include <stdio.h>
-#include <string.h>
 #include "lwct_assert.h"
 #include "lwct_state.h"
 #include "lwct_format.h"
@@ -43,7 +42,7 @@ void _lwct_fatal_assert(struct lwct_state *S, const char bool,
         CTPRINT(ERROR_TAG, "The program will be aborted due to a fatal error.");
 
         lwct_show_log(S);
-        lwct_destroy(S);
+        lwct_destroy_state(S);
         exit(1);
 }
 
@@ -51,8 +50,7 @@ void _lwct_assert(struct lwct_state *S, const char bool,
                         const char *label, const char *file,
                         const char *func, const line)
 {
-        if (strcmp(S->current_file, file) != 0)
-                S->current_file = file;
+        lwct_update_file(S, file);
 
         if (bool) {
                 CTPRINT(SUCCESS_TAG, "\"%s\"", label);
@@ -60,18 +58,21 @@ void _lwct_assert(struct lwct_state *S, const char bool,
                 CTPRINT(ERROR_TAG, "\"%s\" failed in %s:%d (%s%s%s)",
                         label, func, line, UNDERLINE, file, RESET);
 
-                ++(S->error_cnt);
+                lwct_inc_error_cnt(S);
         }
-        ++(S->assertion_cnt);
+        lwct_inc_assertion_cnt(S);
 }
 
 void lwct_show_log(struct lwct_state *S)
 {
-        CTPRINT(LOG_TAG, "%lu asserts.", S->assertion_cnt);
+        unsigned long assertion_cnt = lwct_get_assertion_cnt(S);
+        unsigned long error_cnt = lwct_get_error_cnt(S);
 
-        if (S->error_cnt == 0)
+        CTPRINT(LOG_TAG, "%lu asserts.", assertion_cnt);
+
+        if (error_cnt == 0)
                 CTPRINT(LOG_TAG, "No errors found.");
         else
-                CTPRINT(LOG_TAG, "%lu error%s found.",
-                        S->error_cnt, PLURAL(S->error_cnt));
+                CTPRINT(LOG_TAG, "%llu error%s found.",
+                        error_cnt, PLURAL(error_cnt));
 }
