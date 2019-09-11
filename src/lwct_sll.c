@@ -1,6 +1,6 @@
 /*
- * lwct_sll.c, v.0.1.0
- * 
+ * lwct_sll.c, v.0.1.1
+ *
  * Single linked list
  */
 
@@ -29,7 +29,7 @@ struct lwct_sll_head {
 	struct lwct_sll_node *current;
 };
 
-lwctl_sll_ret lwct_sll_create(struct lwct_sll_head **sll)
+lwct_sll_ret lwct_sll_create(struct lwct_sll_head **sll)
 {
 	if (!sll)
 		return LWCTL_SLL_PARAM;
@@ -42,18 +42,18 @@ lwctl_sll_ret lwct_sll_create(struct lwct_sll_head **sll)
 	return LWCTL_SLL_OK;
 }
 
-lwctl_sll_ret lwct_sll_destroy(struct lwct_sll_head **sll)
+lwct_sll_ret lwct_sll_destroy(struct lwct_sll_head *sll)
 {
 	if (!sll)
 		return LWCTL_SLL_PARAM;
-	lwctl_sll_ret ret;
-	if ((ret = lwct_sll_clean(*sll)) != LWCTL_SLL_OK)
+	lwct_sll_ret ret;
+	if ((ret = lwct_sll_clean(sll)) != LWCTL_SLL_OK)
 		return ret;
-	free(*sll);
+	free(sll);
 	return LWCTL_SLL_OK;
 }
 
-lwctl_sll_ret lwct_sll_insert(lwct_sll *sll, void *info,
+lwct_sll_ret lwct_sll_insert(lwct_sll *sll, void *info,
                                             void (*delete_f)(void *self))
 {
 	if (!sll || !info)
@@ -63,17 +63,20 @@ lwctl_sll_ret lwct_sll_insert(lwct_sll *sll, void *info,
 		return LWCTL_SLL_MEM;
 	node->info = info;
 	if (sll->current == NULL) {
+                /* Empty list */
 		node->next = NULL;
 		sll->first = node;
 	} else {
+                /* Not empty */
 		node->next = sll->current->next;
+                sll->current->next = node;
 	}
-	sll->current = node;
+        sll->current = node;
 	node->delete_f = delete_f;
 	return LWCTL_SLL_OK;
 }
 
-lwctl_sll_ret lwct_sll_remove(lwct_sll *sll, void **pinfo)
+lwct_sll_ret lwct_sll_remove(lwct_sll *sll, void **pinfo)
 {
 	if (!sll || !pinfo)
 		return LWCTL_SLL_PARAM;
@@ -89,16 +92,16 @@ lwctl_sll_ret lwct_sll_remove(lwct_sll *sll, void **pinfo)
 		/* Current is the first */
 		sll->current = p->next;
 		sll->first = p->next;
-		free(p);
 	} else {
 		/* Current is not the first */
 		ant->next = p->next;
 		sll->current = ant;
 	}
+        free(p);
 	return LWCTL_SLL_OK;
 }
 
-lwctl_sll_ret lwct_sll_get(lwct_sll *sll, void **pinfo)
+lwct_sll_ret lwct_sll_get(lwct_sll *sll, void **pinfo)
 {
 	if (!sll || !pinfo)
 		return LWCTL_SLL_PARAM;
@@ -109,7 +112,7 @@ lwctl_sll_ret lwct_sll_get(lwct_sll *sll, void **pinfo)
 	return LWCTL_SLL_OK;
 }
 
-lwctl_sll_ret lwct_sll_next(lwct_sll *sll)
+lwct_sll_ret lwct_sll_next(lwct_sll *sll)
 {
 	if (!sll)
 		return LWCTL_SLL_PARAM;
@@ -122,7 +125,7 @@ lwctl_sll_ret lwct_sll_next(lwct_sll *sll)
 	return LWCTL_SLL_OK;
 }
 
-lwctl_sll_ret lwct_sll_beginning(lwct_sll *sll)
+lwct_sll_ret lwct_sll_beginning(lwct_sll *sll)
 {
 	if (!sll)
 		return LWCTL_SLL_PARAM;
@@ -133,14 +136,14 @@ lwctl_sll_ret lwct_sll_beginning(lwct_sll *sll)
 	return LWCTL_SLL_OK;
 }
 
-lwctl_sll_ret lwct_sll_isempty(lwct_sll *sll)
+lwct_sll_ret lwct_sll_isempty(lwct_sll *sll)
 {
 	if (!sll)
 		return LWCTL_SLL_PARAM;
 	return sll->first == NULL ? LWCTL_SLL_EMPTY : LWCTL_SLL_NOTEMPTY;
 }
 
-lwctl_sll_ret lwct_sll_clean(lwct_sll *sll)
+lwct_sll_ret lwct_sll_clean(lwct_sll *sll)
 {
 	if (!sll)
 		return LWCTL_SLL_PARAM;

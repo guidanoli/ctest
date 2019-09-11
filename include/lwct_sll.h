@@ -1,6 +1,6 @@
 /*
- * lwct_sll.h, v.0.1.0
- * 
+ * lwct_sll.h, v.0.1.1
+ *
  * SLL - Single Linked List
  */
 
@@ -29,7 +29,7 @@ typedef enum {
     LWCTL_SLL_EOL,
     /* End of list */
 
-} lwctl_sll_ret;
+} lwct_sll_ret;
 
 /*
  * Single Linked List
@@ -39,26 +39,26 @@ typedef struct lwct_sll_head lwct_sll;
 /*
  * Functions for SLL node lifecycle
  */
-LWCTL_FUNC lwctl_sll_ret lwct_sll_create(lwct_sll **sll);
+LWCTL_API lwct_sll_ret lwct_sll_create(lwct_sll **sll);
 
-LWCTL_FUNC lwctl_sll_ret lwct_sll_destroy(lwct_sll **sll);
+LWCTL_API lwct_sll_ret lwct_sll_destroy(lwct_sll *sll);
 
 /*
  * Functions for internal state manipulation
  */
-LWCTL_FUNC lwctl_sll_ret lwct_sll_insert(lwct_sll *sll, void *info,
+LWCTL_API lwct_sll_ret lwct_sll_insert(lwct_sll *sll, void *info,
                                             void (*delete_f)(void *self));
 
-LWCTL_FUNC lwctl_sll_ret lwct_sll_remove(lwct_sll *sll, void **pinfo);
+LWCTL_API lwct_sll_ret lwct_sll_remove(lwct_sll *sll, void **pinfo);
 
-LWCTL_FUNC lwctl_sll_ret lwct_sll_get(lwct_sll *sll, void **pinfo);
+LWCTL_API lwct_sll_ret lwct_sll_get(lwct_sll *sll, void **pinfo);
 
-LWCTL_FUNC lwctl_sll_ret lwct_sll_next(lwct_sll *sll);
+LWCTL_API lwct_sll_ret lwct_sll_next(lwct_sll *sll);
 
-LWCTL_FUNC lwctl_sll_ret lwct_sll_beginning(lwct_sll *sll);
+LWCTL_API lwct_sll_ret lwct_sll_beginning(lwct_sll *sll);
 
-LWCTL_FUNC lwctl_sll_ret lwct_sll_isempty(lwct_sll *sll);
+LWCTL_API lwct_sll_ret lwct_sll_isempty(lwct_sll *sll);
 
-LWCTL_FUNC lwctl_sll_ret lwct_sll_clean(lwct_sll *sll);
+LWCTL_API lwct_sll_ret lwct_sll_clean(lwct_sll *sll);
 
 #endif

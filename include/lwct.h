@@ -1,5 +1,5 @@
 /*
- * lwct.h, v.3.0.1
+ * lwct.h, v.3.0.2
  *
  * Lightweight C Test Library
  */
@@ -29,7 +29,7 @@ typedef struct lwct_state lwct_state;
  * Functions for test submission work much like observers,
  * and receive the following informations:
  * @S           test environment state
- * @repetition  index of repetition
+ * @repetition  index of repetition [1 to repetition_cnt]
  */
 LWCTL_API void lwct_submit_test(void (*func)(lwct_state *S));
 

@@ -26,7 +26,7 @@ void lwct_submit_batch(void (*func)(lwct_state *S, unsigned long rep),
         if (!func || repetition_cnt <= 0) return;
         lwct_state *S = lwct_create_state();
         if (!S) return;
-        for (unsigned long i = 0; i < repetition_cnt; ++i)
+        for (unsigned long i = 1; i <= repetition_cnt; ++i)
                 (*func)(S, i);
         lwct_show_log(S);
         lwct_destroy_state(S);
