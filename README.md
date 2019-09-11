@@ -96,4 +96,4 @@ The LWCTL run the tests for you! Simply implement your test case with the `void 
 
 #### Submitting your batch job
 
-If you want to run tests that runs N times, we got you covered too! Simply implement your test case with the `void func(lwct_state *S, unsigned long i)` signature, and then call the `lwct_submit_test(func, N)` for N jobs. The second argument you receive is the iteration, spanning from 0 to N-1. After N repetitions, the log is printed out.
+If you want to run tests that runs N times, we got you covered too! Simply implement your test case with the `void func(lwct_state *S, unsigned long i)` signature, and then call the `lwct_submit_test(func, N)` for N jobs. The second argument you receive is the iteration, spanning from 1 to N. After N repetitions, the log is printed out.
