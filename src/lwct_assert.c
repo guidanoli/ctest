@@ -1,5 +1,5 @@
 /*
- * lwct_assert.c, v.2.0.1
+ * lwct_assert.c, v.2.0.2
  *
  * Assertion and log utilities
  */
@@ -55,8 +55,17 @@ void _lwct_assert(struct lwct_state *S, const char bool,
         if (bool) {
                 CTPRINT(SUCCESS_TAG, "\"%s\"", label);
         } else {
-                CTPRINT(ERROR_TAG, "\"%s\" failed in %s:%d (%s%s%s)",
-                        label, func, line, UNDERLINE, file, RESET);
+                char is_batch = lwct_get_type(S) == LWCTL_STATE_TYPE_BATCH;
+                if (is_batch) {
+                        CTPRINT(ERROR_TAG,
+                                "\"%s\" failed in %s:%d (%s%s%s) (%d/%d)",
+                                label, func, line, UNDERLINE, file, RESET,
+                                lwct_get_repetition_cnt(S),
+                                lwct_get_repetition_total_cnt(S));
+                } else {
+                        CTPRINT(ERROR_TAG, "\"%s\" failed in %s:%d (%s%s%s)",
+                                label, func, line, UNDERLINE, file, RESET);
+                }
 
                 lwct_inc_error_cnt(S);
         }
