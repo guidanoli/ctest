@@ -15,7 +15,7 @@
 LWCTL_API void lwct_submit_test(void (*func)(lwct_state *S));
 
 LWCTL_API void lwct_submit_batch(void (*func)(lwct_state *S,
-                                unsigned long repetition),
-                                unsigned long repetition_cnt);
+				unsigned long repetition),
+				unsigned long repetition_cnt);
 
 #endif

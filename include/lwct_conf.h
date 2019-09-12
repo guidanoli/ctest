@@ -13,7 +13,7 @@
  * @LWCTL_FUNC  internal use
  * @LWCTL_API   exported to the API
  */
-#define LWCTL_FUNC      __attribute__((visibility("hidden"))) extern
-#define LWCTL_API       extern
+#define LWCTL_FUNC	__attribute__((visibility("hidden"))) extern
+#define LWCTL_API	 extern
 
 #endif

@@ -11,14 +11,14 @@
 
 /*
  * Macros for assertion and log display
- * @S           test environment state
- * @bool        boolean sentence
+ * @S		test environment state
+ * @bool	boolean sentence
  */
 #define lwct_fatal_assert(S, bool) \
-        _lwct_fatal_assert(S, bool, #bool, __FILE__, __func__, __LINE__)
+	_lwct_fatal_assert(S, bool, #bool, __FILE__, __func__, __LINE__)
 
 #define lwct_assert(S, bool) \
-        _lwct_assert(S, bool, #bool, __FILE__, __func__, __LINE__)
+	_lwct_assert(S, bool, #bool, __FILE__, __func__, __LINE__)
 
 /*
  * Testing environment state
@@ -28,14 +28,14 @@ typedef struct lwct_state lwct_state;
 /*
  * Functions for test submission work much like observers,
  * and receive the following informations:
- * @S           test environment state
- * @repetition  index of repetition [1 to repetition_cnt]
+ * @S		test environment state
+ * @repetition	index of repetition [1 to repetition_cnt]
  */
 LWCTL_API void lwct_submit_test(void (*func)(lwct_state *S));
 
 LWCTL_API void lwct_submit_batch(void (*func)(lwct_state *S,
-                                unsigned long repetition),
-                                unsigned long repetition_cnt);
+				unsigned long repetition),
+				unsigned long repetition_cnt);
 
 /*
  * Functions for assertion and log display
@@ -43,11 +43,11 @@ LWCTL_API void lwct_submit_batch(void (*func)(lwct_state *S,
  * Use the lwct_assert and lwct_fatal_assert macros.
  */
 LWCTL_API void _lwct_fatal_assert(lwct_state *S, const char bool,
-                        const char *label, const char *file,
-                        const char *func, const line);
+			const char *label, const char *file,
+			const char *func, const line);
 
 LWCTL_API void _lwct_assert(lwct_state *S, const char bool,
-                        const char *label, const char *file,
-                        const char *func, const line);
+			const char *label, const char *file,
+			const char *func, const line);
 
 #endif

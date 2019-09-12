@@ -54,7 +54,7 @@ lwct_sll_ret lwct_sll_destroy(struct lwct_sll_head *sll)
 }
 
 lwct_sll_ret lwct_sll_insert(lwct_sll *sll, void *info,
-                                            void (*delete_f)(void *self))
+						void (*delete_f)(void *self))
 {
 	if (!sll || !info)
 		return LWCTL_SLL_PARAM;
@@ -63,15 +63,15 @@ lwct_sll_ret lwct_sll_insert(lwct_sll *sll, void *info,
 		return LWCTL_SLL_MEM;
 	node->info = info;
 	if (sll->current == NULL) {
-                /* Empty list */
+		/* Empty list */
 		node->next = NULL;
 		sll->first = node;
 	} else {
-                /* Not empty */
+		/* Not empty */
 		node->next = sll->current->next;
-                sll->current->next = node;
+		sll->current->next = node;
 	}
-        sll->current = node;
+	sll->current = node;
 	node->delete_f = delete_f;
 	return LWCTL_SLL_OK;
 }
@@ -97,7 +97,7 @@ lwct_sll_ret lwct_sll_remove(lwct_sll *sll, void **pinfo)
 		ant->next = p->next;
 		sll->current = ant;
 	}
-        free(p);
+	free(p);
 	return LWCTL_SLL_OK;
 }
 

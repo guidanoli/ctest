@@ -8,18 +8,18 @@
 
 void err(lwct_state *S)
 {
-        lwct_assert(S, 1);
-        lwct_assert(S, 0);
+	lwct_assert(S, 1);
+	lwct_assert(S, 0);
 }
 
 void ok(lwct_state *S)
 {
-        lwct_assert(S, 1);
-        lwct_assert(S, 2);
+	lwct_assert(S, 1);
+	lwct_assert(S, 2);
 }
 
 int main(void)
 {
-        lwct_submit_test(err);
-        lwct_submit_test(ok);
+	lwct_submit_test(err);
+	lwct_submit_test(ok);
 }

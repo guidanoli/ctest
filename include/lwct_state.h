@@ -14,11 +14,11 @@
  */
 typedef enum {
 
-        LWCTL_STATE_TYPE_TEST,
-        /* Single instance test */
+	LWCTL_STATE_TYPE_TEST,
+	/* Single instance test */
 
-        LWCTL_STATE_TYPE_BATCH,
-        /* Multiple instances batch */
+	LWCTL_STATE_TYPE_BATCH,
+	/* Multiple instances batch */
 
 } lwct_state_type;
 
