@@ -7,7 +7,7 @@
 #ifndef LWCT_SLL_H
 #define LWCT_SLL_H
 
-#include "lwct.h"
+#include "lwct_conf.h"
 
 typedef enum {
 
@@ -60,5 +60,7 @@ LWCTL_API lwct_sll_ret lwct_sll_beginning(lwct_sll *sll);
 LWCTL_API lwct_sll_ret lwct_sll_isempty(lwct_sll *sll);
 
 LWCTL_API lwct_sll_ret lwct_sll_clean(lwct_sll *sll);
+
+LWCTL_API lwct_sll_ret lwct_sll_debug(lwct_sll *sll);
 
 #endif

@@ -22,16 +22,6 @@
 #define LOG_TAG		YELLOW,		"LOG"
 #define SUCCESS_TAG	GREEN,		"SUCCESS"
 
-/*
- * Colourful tag printing
- *
- * Every message output by the LWCT library is formatted with
- * a leading tag, which is printed in a specific colour.
- */
-#define CTPRINT(tag, message, ...) \
-	printf("%s[%s%s%s]%s " message "\n", \
-	WHITE, tag, WHITE, RESET, ##__VA_ARGS__)
-
 void _lwct_fatal_assert(struct lwct_state *S, const char bool,
 			const char *label, const char *file,
 			const char *func, const line)

@@ -11,6 +11,19 @@
 #ifndef LWCT_FORMAT_H
 #define LWCT_FORMAT_H
 
+/*
+ * Colourful tag printing
+ *
+ * Every message output by the LWCT library is formatted with
+ * a leading tag, which is printed in a specific colour.
+ * 
+ * Tags are often defined in macros as a pair of two arguments
+ * #define MY_TAG COLOR, LABEL
+ */
+#define CTPRINT(tag, message, ...) \
+	printf("%s[%s%s%s]%s " message "\n", \
+	WHITE, tag, WHITE, RESET, ##__VA_ARGS__)
+
 #define RESET "\x1b[0m"
 #define BOLD "\x1b[1m"
 #define UNDERLINE "\x1b[4m"

@@ -79,7 +79,8 @@ void simpleTest(lwct_state *S)
 	lwct_sll *l = NULL;
 	ret = lwct_sll_create(&l);
 	lwct_fatal_assert(S, ret != LWCTL_SLL_MEM);
-	lwct_assert(S, ret == LWCTL_SLL_OK);
+	lwct_fatal_assert(S, ret == LWCTL_SLL_OK);
+	lwct_sll_debug(l);
 	lwct_assert(S, lwct_sll_destroy(l) == LWCTL_SLL_OK);
 }
 
@@ -98,6 +99,7 @@ void _pyramidTest(lwct_state *S, unsigned long n, lwct_sll *l)
 		lwct_assert(S, p == (void *) i);
 		lwct_assert(S, lwct_sll_isempty(l) == LWCTL_SLL_NOTEMPTY);
 	}
+	lwct_sll_debug(l);
 	for (int i = 1; i <= n; i++) {
 		void *p = NULL;
 		lwct_assert(S, lwct_sll_isempty(l) == LWCTL_SLL_NOTEMPTY);

@@ -38,6 +38,16 @@ LWCTL_API void lwct_submit_batch(void (*func)(lwct_state *S,
 				unsigned long repetition_cnt);
 
 /*
+ * Deconstructor submition - will called the deconstructor function parsing
+ * the reference to data whenever a fatal assert catches a false assertion
+ * @S			test environment state
+ * @deconstructor	deconstructor function
+ * @pdata		reference to data
+ */
+LWCTL_API void lwct_submit_desconstructor(lwct_state *S,
+				void (*deconstructor)(void *p), void *pdata);
+
+/*
  * Functions for assertion and log display
  * There is no point in calling these directly.
  * Use the lwct_assert and lwct_fatal_assert macros.

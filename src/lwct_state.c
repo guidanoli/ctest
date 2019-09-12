@@ -8,6 +8,7 @@
 #include <string.h>
 #include "lwct.h"
 #include "lwct_state.h"
+#include "lwct_deconstructor.h"
 
 /*
  * Test state data
@@ -23,6 +24,7 @@
  */
 struct lwct_state {
 	lwct_state_type type;
+	lwct_deconstructor *deconstructor;
 	char *current_file;
 	unsigned long assertion_cnt;
 	unsigned long error_cnt;
@@ -35,6 +37,11 @@ struct lwct_state *lwct_create_state(lwct_state_type type)
 	struct lwct_state *S = malloc(sizeof(struct lwct_state));
 	if (!S)
 		return NULL;
+	if(lwct_deconstructor_init(&(S->deconstructor))
+						!= LWCTL_DECONSTRUCTOR_OK) {
+		free(S);
+		return NULL;
+	}
 	S->current_file = __FILE__;
 	S->assertion_cnt = 0;
 	S->error_cnt = 0;
@@ -46,6 +53,8 @@ struct lwct_state *lwct_create_state(lwct_state_type type)
 
 void lwct_destroy_state(struct lwct_state *S)
 {
+	if (!S) return;
+	lwct_deconstructor_destroy(S->deconstructor);
 	free(S);
 }
 
@@ -103,4 +112,11 @@ unsigned long lwct_get_repetition_cnt(lwct_state *S)
 unsigned long lwct_get_repetition_total_cnt(lwct_state *S)
 {
 	return S->total_repetitions;
+}
+
+void lwct_submit_desconstructor(lwct_state *S,
+				void (*deconstructor)(void *p), void *pdata)
+{
+	if (!S || !deconstructor || !pdata) return;
+	lwct_deconstructor_insert(S->deconstructor, deconstructor, pdata);
 }

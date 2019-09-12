@@ -29,6 +29,9 @@ LWCTL_API lwct_state *lwct_create_state(lwct_state_type type);
 
 LWCTL_API void lwct_destroy_state(lwct_state *S);
 
+LWCTL_API void lwct_submit_desconstructor(lwct_state *S,
+				void (*deconstructor)(void *p), void *pdata);
+
 /*
  * Functions for internal state manipulation
  */

@@ -6,6 +6,9 @@
 
 #include <stdlib.h>
 #include "lwct_sll.h"
+#include "lwct_format.h"
+
+#define SLL_TAG MAGENTA, "SLL"
 
 /*
  * Single linked list node
@@ -157,5 +160,19 @@ lwct_sll_ret lwct_sll_clean(lwct_sll *sll)
 	}
 	sll->current = NULL;
 	sll->first = NULL;
+	return LWCTL_SLL_OK;
+}
+
+lwct_sll_ret lwct_sll_debug(lwct_sll *sll)
+{
+	if (!sll)
+		return LWCTL_SLL_PARAM;
+	CTPRINT(SLL_TAG, "First = %p", sll->first);
+	CTPRINT(SLL_TAG, "Current = %p", sll->current);
+	unsigned int i = 0;
+	for (struct lwct_sll_node *p = sll->first; p != NULL; p = p->next) {
+		CTPRINT(SLL_TAG, "[%u] = %p (function %p)", i, p, p->delete_f);
+		++i;
+	}
 	return LWCTL_SLL_OK;
 }
