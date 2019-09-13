@@ -1,5 +1,5 @@
 /*
- * lwct_deconstructor.h, v.0.2.0
+ * lwct_deconstructor.h, v.1.0.0
  * 
  * Deconstructor
  */
@@ -11,19 +11,19 @@
 
 typedef enum {
 	
-	LWCTL_DECONSTRUCTOR_OK,
+	LWCT_DECONSTRUCTOR_OK,
 	/* Ok */
 	
-	LWCTL_DECONSTRUCTOR_PARAM,
+	LWCT_DECONSTRUCTOR_PARAM,
 	/* Parameter is invalid */
 	
-	LWCTL_DECONSTRUCTOR_MEM,
+	LWCT_DECONSTRUCTOR_MEM,
 	/* Not enough memory */
 	
-	LWCTL_DECONSTRUCTOR_DUPLICATE,
+	LWCT_DECONSTRUCTOR_DUPLICATE,
 	/* Duplicate node */
 	
-	LWCTL_DECONSTRUCTOR_UNEXPECTED,
+	LWCT_DECONSTRUCTOR_UNEXPECTED,
 	/* Unexpected error */
 	
 } lwct_deconstructor_ret;

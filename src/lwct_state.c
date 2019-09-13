@@ -1,5 +1,5 @@
 /*
- * lwct_state.c, v.1.0.3
+ * lwct_state.c, v.1.0.4
  *
  * Test state
  */
@@ -8,11 +8,14 @@
 #include <string.h>
 #include "lwct.h"
 #include "lwct_state.h"
+#include "lwct_style.h"
 #include "lwct_deconstructor.h"
 
 /*
  * Test state data
  *
+ * @deconstructor	data structures deconstructors
+ * @style		output style
  * @type		test type (see lwct_state_type)
  * @current_file	name of the last file that called an assertion
  * @assertion_cnt       number of assertions
@@ -23,9 +26,10 @@
  * @total_repetitions	total number of repetitions
  */
 struct lwct_state {
-	lwct_state_type type;
 	lwct_deconstructor *deconstructor;
+	lwct_style *style;
 	char *current_file;
+	lwct_state_type type;
 	unsigned long assertion_cnt;
 	unsigned long error_cnt;
 	unsigned long curr_repetition;
@@ -37,11 +41,18 @@ struct lwct_state *lwct_create_state(lwct_state_type type)
 	struct lwct_state *S = malloc(sizeof(struct lwct_state));
 	if (!S)
 		return NULL;
-	if(lwct_deconstructor_init(&(S->deconstructor))
-						!= LWCTL_DECONSTRUCTOR_OK) {
-		free(S);
+
+	if (lwct_deconstructor_init(&(S->deconstructor))
+						!= LWCT_DECONSTRUCTOR_OK) {
+		lwct_destroy_state(S);
 		return NULL;
 	}
+
+	if (lwct_style_create(&(S->style)) != LWCT_STYLE_OK) {
+		lwct_destroy_state(S);
+		return NULL;
+	}
+
 	S->current_file = __FILE__;
 	S->assertion_cnt = 0;
 	S->error_cnt = 0;
@@ -54,7 +65,13 @@ struct lwct_state *lwct_create_state(lwct_state_type type)
 void lwct_destroy_state(struct lwct_state *S)
 {
 	if (!S) return;
-	lwct_deconstructor_destroy(S->deconstructor);
+
+	if (S->deconstructor)
+		lwct_deconstructor_destroy(S->deconstructor);
+
+	if (S->style)
+		lwct_style_destroy(S->style);
+
 	free(S);
 }
 
@@ -124,4 +141,14 @@ void lwct_submit_desconstructor(lwct_state *S,
 lwct_deconstructor *lwct_get_deconstructor(lwct_state *S)
 {
 	return S->deconstructor;
+}
+
+void lwct_apply_style(lwct_state *S, lwct_style *style)
+{
+	if (!S || !style || S->style == style) return;
+
+	if (S->style)
+		lwct_style_destroy(S->style);
+
+	S->style = style;
 }

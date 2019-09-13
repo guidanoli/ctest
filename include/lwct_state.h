@@ -1,5 +1,5 @@
 /*
- * lwct_state.h, v.1.1.0
+ * lwct_state.h, v.1.2.0
  *
  * Test state header
  */
@@ -9,6 +9,7 @@
 
 #include "lwct.h"
 #include "lwct_deconstructor.h"
+#include "lwct_style.h"
 
 /*
  * Test type enumeration
@@ -32,6 +33,8 @@ LWCTL_API void lwct_destroy_state(lwct_state *S);
 
 LWCTL_API void lwct_submit_desconstructor(lwct_state *S,
 				void (*deconstructor)(void *p), void *pdata);
+
+LWCTL_API void lwct_apply_style(lwct_state *S, lwct_style *style);
 
 /*
  * Functions for internal state manipulation

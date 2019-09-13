@@ -1,5 +1,5 @@
 /*
- * lwct_sll.h, v.0.1.1
+ * lwct_sll.h, v.0.2.0
  *
  * SLL - Single Linked List
  */
@@ -28,6 +28,12 @@ typedef enum {
 
 	LWCTL_SLL_EOL,
 	/* End of list */
+
+	LWCTL_SLL_CONTAINS,
+	/* List contains element */
+
+	LWCTL_SLL_DOES_NOT_CONTAIN,
+	/* List does not contain element */
 
 } lwct_sll_ret;
 
@@ -62,5 +68,7 @@ LWCTL_API lwct_sll_ret lwct_sll_isempty(lwct_sll *sll);
 LWCTL_API lwct_sll_ret lwct_sll_clean(lwct_sll *sll);
 
 LWCTL_API lwct_sll_ret lwct_sll_debug(lwct_sll *sll);
+
+LWCTL_API lwct_sll_ret lwct_sll_contains(lwct_sll *sll, void *info);
 
 #endif

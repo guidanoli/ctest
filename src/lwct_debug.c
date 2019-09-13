@@ -1,5 +1,5 @@
 /*
- * lwct_debug.c, v.0.1.1
+ * lwct_debug.c, v.0.1.2
  *
  * Debug
  */
@@ -38,7 +38,7 @@ lwct_debug_ret lwct_debug_deconstructors(lwct_state *S)
 	if (!dc)
 		return LWCT_DEBUG_CORRUPTED;
 
-	if (lwct_deconstructor_debug(dc) != LWCTL_DECONSTRUCTOR_OK)
+	if (lwct_deconstructor_debug(dc) != LWCT_DECONSTRUCTOR_OK)
 		return LWCT_DEBUG_UNEXPECTED;
 
 	return LWCT_DEBUG_OK;

@@ -1,5 +1,5 @@
 /*
- * lwct_sll.c, v.0.1.2
+ * lwct_sll.c, v.0.1.3
  *
  * Single linked list
  */
@@ -12,6 +12,11 @@
  * CTPRINT Tag
  */
 #define SLL_TAG MAGENTA, "SLL"
+
+/*
+ * ITERATE Macro: Navigate in list
+ */
+#define ITERATE(l, p) for (struct lwct_sll_node *p = l->first; p != NULL; p = p->next)
 
 /*
  * Single linked list node
@@ -173,9 +178,21 @@ lwct_sll_ret lwct_sll_debug(lwct_sll *sll)
 	CTPRINT(SLL_TAG, "First = %p", sll->first);
 	CTPRINT(SLL_TAG, "Current = %p", sll->current);
 	unsigned int i = 0;
-	for (struct lwct_sll_node *p = sll->first; p != NULL; p = p->next) {
+	ITERATE (sll, p) {
 		CTPRINT(SLL_TAG, "[%u] = %p (function %p)", i, p, p->delete_f);
 		++i;
 	}
 	return LWCTL_SLL_OK;
+}
+
+lwct_sll_ret lwct_sll_contains(lwct_sll *sll, void *info)
+{
+	if (!sll || !info)
+		return LWCTL_SLL_PARAM;
+
+	ITERATE (sll, p)
+		if (p->info == info)
+			return LWCTL_SLL_CONTAINS;
+
+	return LWCTL_SLL_DOES_NOT_CONTAIN;
 }

@@ -1,5 +1,5 @@
 /*
- * t.sll.c, v.0.1.1
+ * t.sll.c, v.0.2.0
  *
  * Single Linked List test
  */
@@ -57,7 +57,6 @@ void EmptyTest(lwct_state *S)
 	lwct_sll *l = NULL;
 	ret = lwct_sll_create(&l);
 	lwct_fatal_assert(S, ret != LWCTL_SLL_MEM);
-	lwct_assert(S, ret == LWCTL_SLL_OK);
 	void *p = MAGIC;
 	lwct_assert(S, lwct_sll_remove(l, &p) == LWCTL_SLL_EMPTY);
 	lwct_assert(S, p == MAGIC);
@@ -119,7 +118,6 @@ void pyramidTest(lwct_state *S, unsigned long n)
 	lwct_sll *l = NULL;
 	ret = lwct_sll_create(&l);
 	lwct_fatal_assert(S, ret != LWCTL_SLL_MEM);
-	lwct_assert(S, ret == LWCTL_SLL_OK);
 	_pyramidTest(S, n, l);
 	lwct_assert(S, lwct_sll_destroy(l) == LWCTL_SLL_OK);
 }
@@ -133,7 +131,6 @@ void removeFromBeginning(lwct_state *S)
 	lwct_sll *l = NULL;
 	ret = lwct_sll_create(&l);
 	lwct_fatal_assert(S, ret != LWCTL_SLL_MEM);
-	lwct_assert(S, ret == LWCTL_SLL_OK);
 	for (int i = 1; i <= 3; i++) {
 		ret = lwct_sll_insert(l, (void *) i, delfunc);
 		lwct_fatal_assert(S, ret != LWCTL_SLL_MEM);
@@ -159,7 +156,6 @@ void cleanTest(lwct_state *S)
 	lwct_sll *l = NULL;
 	ret = lwct_sll_create(&l);
 	lwct_fatal_assert(S, ret != LWCTL_SLL_MEM);
-	lwct_assert(S, ret == LWCTL_SLL_OK);
 	for (int i = 1; i <= 3; i++) {
 		ret = lwct_sll_insert(l, (void *) i, delfunc);
 		lwct_fatal_assert(S, ret != LWCTL_SLL_MEM);
@@ -177,12 +173,35 @@ void deleteFuncTest(lwct_state *S)
 	lwct_sll *l = NULL;
 	ret = lwct_sll_create(&l);
 	lwct_fatal_assert(S, ret != LWCTL_SLL_MEM);
-	lwct_assert(S, ret == LWCTL_SLL_OK);
 	ret = lwct_sll_insert(l, MAGIC, delfunc);
 	lwct_fatal_assert(S, ret != LWCTL_SLL_MEM);
 	last_deleted = NULL;
 	lwct_assert(S, lwct_sll_clean(l) == LWCTL_SLL_OK);
 	lwct_assert(S, last_deleted == MAGIC);
+	lwct_assert(S, lwct_sll_destroy(l) == LWCTL_SLL_OK);
+}
+
+void containsTest(lwct_state *S, unsigned long n)
+{
+	lwct_sll_ret ret;
+	lwct_sll *l = NULL;
+	ret = lwct_sll_create(&l);
+	lwct_fatal_assert(S, ret != LWCTL_SLL_MEM);
+	for (int i = 1; i <= n; i++) {
+		lwct_assert(S, lwct_sll_insert(l, (void *) i, NULL)
+							== LWCTL_SLL_OK);
+		lwct_sll_debug(l);
+		lwct_assert(S, lwct_sll_contains(l, (void *) i)
+							== LWCTL_SLL_CONTAINS);
+	}
+	for (int i = n; i > 0; i--) {
+		lwct_assert(S, lwct_sll_contains(l, (void *) i)
+							== LWCTL_SLL_CONTAINS);
+	}
+	lwct_assert(S, lwct_sll_contains(l, (void *) -1)
+						== LWCTL_SLL_DOES_NOT_CONTAIN);
+	lwct_assert(S, lwct_sll_contains(l, (void *) n + 1)
+						== LWCTL_SLL_DOES_NOT_CONTAIN);
 	lwct_assert(S, lwct_sll_destroy(l) == LWCTL_SLL_OK);
 }
 
@@ -194,4 +213,5 @@ int main(void)
 	lwct_submit_test(removeFromBeginning);
 	lwct_submit_test(cleanTest);
 	lwct_submit_test(deleteFuncTest);
+	lwct_submit_batch(containsTest, 5);
 }
