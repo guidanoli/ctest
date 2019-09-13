@@ -1,5 +1,5 @@
 /*
- * lwct_state.c, v.1.0.2
+ * lwct_state.c, v.1.0.3
  *
  * Test state
  */
@@ -119,4 +119,9 @@ void lwct_submit_desconstructor(lwct_state *S,
 {
 	if (!S || !deconstructor || !pdata) return;
 	lwct_deconstructor_insert(S->deconstructor, deconstructor, pdata);
+}
+
+lwct_deconstructor *lwct_get_deconstructor(lwct_state *S)
+{
+	return S->deconstructor;
 }

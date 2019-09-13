@@ -1,5 +1,5 @@
 /*
- * lwct_state.h, v.1.0.2
+ * lwct_state.h, v.1.1.0
  *
  * Test state header
  */
@@ -8,6 +8,7 @@
 #define LWCT_STATE_H
 
 #include "lwct.h"
+#include "lwct_deconstructor.h"
 
 /*
  * Test type enumeration
@@ -59,5 +60,7 @@ LWCTL_FUNC char *lwct_get_current_file(lwct_state *S);
 LWCTL_FUNC unsigned long lwct_get_repetition_cnt(lwct_state *S);
 
 LWCTL_FUNC unsigned long lwct_get_repetition_total_cnt(lwct_state *S);
+
+LWCTL_FUNC lwct_deconstructor *lwct_get_deconstructor(lwct_state *S);
 
 #endif

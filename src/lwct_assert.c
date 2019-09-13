@@ -1,5 +1,5 @@
 /*
- * lwct_assert.c, v.2.0.2
+ * lwct_assert.c, v.2.0.3
  *
  * Assertion and log utilities
  */
@@ -12,11 +12,7 @@
 #define PLURAL(q) q==1 ? "" : "s"
 
 /*
- * Predefined tags
- *
- * Every tag is defined as a pair (color, label)
- * Colours are escape codes as defined in lwct_format.h
- * Labels are merely strings that will be printed out.
+ * CTPRINT Tags
  */
 #define ERROR_TAG	RED,		"ERROR"
 #define LOG_TAG		YELLOW,		"LOG"

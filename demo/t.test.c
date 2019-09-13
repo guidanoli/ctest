@@ -1,5 +1,5 @@
 /*
- * t.batch.c, v.1.0.0
+ * t.test.c, v.1.0.1
  *
  * Test demo
  */

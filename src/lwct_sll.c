@@ -1,5 +1,5 @@
 /*
- * lwct_sll.c, v.0.1.1
+ * lwct_sll.c, v.0.1.2
  *
  * Single linked list
  */
@@ -8,6 +8,9 @@
 #include "lwct_sll.h"
 #include "lwct_format.h"
 
+/*
+ * CTPRINT Tag
+ */
 #define SLL_TAG MAGENTA, "SLL"
 
 /*

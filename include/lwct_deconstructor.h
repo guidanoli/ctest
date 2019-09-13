@@ -1,5 +1,5 @@
 /*
- * lwct_deconstructor.h, v.0.1.0
+ * lwct_deconstructor.h, v.0.2.0
  * 
  * Deconstructor
  */
@@ -23,6 +23,9 @@ typedef enum {
 	LWCTL_DECONSTRUCTOR_DUPLICATE,
 	/* Duplicate node */
 	
+	LWCTL_DECONSTRUCTOR_UNEXPECTED,
+	/* Unexpected error */
+	
 } lwct_deconstructor_ret;
 
 typedef struct lwct_deconstructor lwct_deconstructor;
@@ -30,9 +33,13 @@ typedef struct lwct_deconstructor lwct_deconstructor;
 LWCTL_FUNC lwct_deconstructor_ret lwct_deconstructor_init(
 						lwct_deconstructor **pdc);
 
-LWCTL_FUNC void lwct_deconstructor_destroy(lwct_deconstructor *dc);
+LWCTL_FUNC lwct_deconstructor_ret lwct_deconstructor_destroy(
+						lwct_deconstructor *dc);
 
 LWCTL_FUNC lwct_deconstructor_ret lwct_deconstructor_insert(
 	lwct_deconstructor *dc, void (*deconstructor)(void *p), void *pdata);
+
+LWCTL_FUNC lwct_deconstructor_ret lwct_deconstructor_debug(
+						lwct_deconstructor *dc);
 
 #endif
