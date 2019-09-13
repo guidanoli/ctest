@@ -1,5 +1,5 @@
 /*
- * lwct_assert.c, v.2.0.3
+ * lwct_assert.c, v.2.0.4
  *
  * Assertion and log utilities
  */
@@ -20,7 +20,7 @@
 
 void _lwct_fatal_assert(struct lwct_state *S, const char bool,
 			const char *label, const char *file,
-			const char *func, const line)
+			const char *func, const unsigned int line)
 {
 	_lwct_assert(S, bool, label, file, func, line);
 	if (bool) return;
@@ -34,7 +34,7 @@ void _lwct_fatal_assert(struct lwct_state *S, const char bool,
 
 void _lwct_assert(struct lwct_state *S, const char bool,
 			const char *label, const char *file,
-			const char *func, const line)
+			const char *func, const unsigned int line)
 {
 	lwct_update_file(S, file);
 
@@ -44,12 +44,12 @@ void _lwct_assert(struct lwct_state *S, const char bool,
 		char is_batch = lwct_get_type(S) == LWCTL_STATE_TYPE_BATCH;
 		if (is_batch) {
 			CTPRINT(ERROR_TAG,
-				"\"%s\" failed in %s:%d (%s%s%s) (%d/%d)",
+				"\"%s\" failed in %s:%u (%s%s%s) (%d/%d)",
 				label, func, line, UNDERLINE, file, RESET,
 				lwct_get_repetition_cnt(S),
 				lwct_get_repetition_total_cnt(S));
 		} else {
-			CTPRINT(ERROR_TAG, "\"%s\" failed in %s:%d (%s%s%s)",
+			CTPRINT(ERROR_TAG, "\"%s\" failed in %s:%u (%s%s%s)",
 				label, func, line, UNDERLINE, file, RESET);
 		}
 
@@ -68,6 +68,6 @@ void lwct_show_log(struct lwct_state *S)
 	if (error_cnt == 0)
 		CTPRINT(LOG_TAG, "No errors found.");
 	else
-		CTPRINT(LOG_TAG, "%llu error%s found.",
+		CTPRINT(LOG_TAG, "%lu error%s found.",
 			error_cnt, PLURAL(error_cnt));
 }

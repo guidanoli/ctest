@@ -1,5 +1,5 @@
 /*
- * lwct.h, v.3.0.2
+ * lwct.h, v.3.0.3
  *
  * Lightweight C Test Library
  */
@@ -54,10 +54,10 @@ LWCTL_API void lwct_submit_desconstructor(lwct_state *S,
  */
 LWCTL_API void _lwct_fatal_assert(lwct_state *S, const char bool,
 			const char *label, const char *file,
-			const char *func, const line);
+			const char *func, const unsigned int line);
 
 LWCTL_API void _lwct_assert(lwct_state *S, const char bool,
 			const char *label, const char *file,
-			const char *func, const line);
+			const char *func, const unsigned int line);
 
 #endif
