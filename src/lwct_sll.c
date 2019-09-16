@@ -1,5 +1,5 @@
 /*
- * lwct_sll.c, v.0.1.3
+ * lwct_sll.c, v.0.1.4
  *
  * Single linked list
  */
@@ -193,6 +193,20 @@ lwct_sll_ret lwct_sll_contains(lwct_sll *sll, void *info)
 	ITERATE (sll, p)
 		if (p->info == info)
 			return LWCTL_SLL_CONTAINS;
+
+	return LWCTL_SLL_DOES_NOT_CONTAIN;
+}
+
+lwct_sll_ret lwct_sll_search(lwct_sll *sll, void *info)
+{
+	if (!sll || !info)
+		return LWCTL_SLL_PARAM;
+
+	ITERATE (sll, p)
+		if (p->info == info) {
+			sll->current = p;
+			return LWCTL_SLL_CONTAINS;
+		}
 
 	return LWCTL_SLL_DOES_NOT_CONTAIN;
 }

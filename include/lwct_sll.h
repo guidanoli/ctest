@@ -1,5 +1,5 @@
 /*
- * lwct_sll.h, v.0.2.0
+ * lwct_sll.h, v.0.2.1
  *
  * SLL - Single Linked List
  */
@@ -69,6 +69,20 @@ LWCTL_API lwct_sll_ret lwct_sll_clean(lwct_sll *sll);
 
 LWCTL_API lwct_sll_ret lwct_sll_debug(lwct_sll *sll);
 
+/*
+ * Searches for node with information info
+ * If found, returns LWCTL_SLL_CONTAINS
+ * If not, returns LWCTL_SLL_DOES_NOT_CONTAIN
+ * If one of the parameters is null, returns LWCTL_SLL_PARAM
+ */
 LWCTL_API lwct_sll_ret lwct_sll_contains(lwct_sll *sll, void *info);
+
+/*
+ * Searches for node with information info
+ * If found, makes it the current node an returns LWCTL_SLL_CONTAINS
+ * If not, returns LWCTL_SLL_DOES_NOT_CONTAIN
+ * If one of the parameters is null, returns LWCTL_SLL_PARAM
+ */
+LWCTL_API lwct_sll_ret lwct_sll_search(lwct_sll *sll, void *info);
 
 #endif
